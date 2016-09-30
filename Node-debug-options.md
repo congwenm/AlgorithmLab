@@ -10,5 +10,6 @@ iron-node FILE [--param1=foo --param2=bar];
 
 
 3. node inspector, debug using chrome
-npm i -g node-inspector
-node debug
+> npm i -g node-inspector
+then use this to open it up debugging console in your default browser
+> node-debug FILE_PATH --debug-brk
