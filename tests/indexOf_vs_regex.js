@@ -1,6 +1,7 @@
 var Benchmark = require('benchmark')
 var suite = new Benchmark.Suite;
 
+
 suite.add('RegEx#test', function() {
   /o/.test('Hello World!')
 })
@@ -17,4 +18,4 @@ suite.add('RegEx#test', function() {
   console.log('Fastest is ' + this.filter('fastest').map('name'))
 })
 
-.run({ async: true })
+suite.run({ async: true, initCount: 1, maxTime: 1 })

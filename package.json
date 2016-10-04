@@ -4,10 +4,15 @@
   "description": "",
   "main": "index.js",
   "dependencies": {
+    "beautify-benchmark": "^0.2.4",
     "benchmark": "^2.1.1",
-    "microtime": "^2.1.1"
+    "lodash": "^4.16.3",
+    "microtime": "^2.1.1",
+    "platform": "^1.3.1"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "express": "^4.14.0"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
