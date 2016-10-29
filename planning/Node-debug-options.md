@@ -5,8 +5,17 @@
 iron-node FILE [--param1=foo --param2=bar];
 
 
-2. default debug
->node debug FILE
+2. default debug (built in)
+> node debug FILE
+
+- use debugger
+```
+  continue – cont, c
+  step – next, n
+  step in – step, s
+  step out – out, o
+```
+
 
 
 3. node inspector, debug using chrome
