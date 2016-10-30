@@ -6,7 +6,8 @@
   "scripts": {
     "build": "npm run lint && webpack --config webpack.config.js -p",
     "dev": "npm run lint && webpack-dev-server --config webpack.dev.config.js --inline",
-    "lint": "./node_modules/.bin/eslint js"
+    "lint": "./node_modules/.bin/eslint js",
+    "test": "babel-node spec/run.js"
   },
   "author": "Yang Zhao",
   "license": "ISC",
@@ -27,7 +28,7 @@
     "jquery.scrollto": "^2.1.2",
     "lodash": "^4.16.4",
     "microtime": "^2.1.1",
-    "node-sass": "^3.4.2",
+    "node-sass": "^3.10.1",
     "postcss-loader": "^0.10.1",
     "sass-loader": "^3.2.0",
     "style-loader": "^0.13.0",
