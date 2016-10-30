@@ -7,7 +7,8 @@
     "build": "npm run lint && webpack --config webpack.config.js -p",
     "dev": "npm run lint && webpack-dev-server --config webpack.dev.config.js --inline",
     "lint": "./node_modules/.bin/eslint js",
-    "test": "babel-node spec/run.js"
+    "test": "find app spec algorithms | entr babel-node spec/run.js",
+    "amortize": "babel-node ./amortization/amortize.js"
   },
   "author": "Yang Zhao",
   "license": "ISC",
