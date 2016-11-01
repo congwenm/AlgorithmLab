@@ -3,7 +3,7 @@ import mergeSort, { merge } from '../algorithms/merge_sort';
 import { ascendingVerifier } from './order_verifier';
 
 var scrambledNumbers = [5,1,2,3,4];
-fdescribe('#mergeSort', () => {
+describe('#mergeSort', () => {
   it ('should sort numbers', () => {
     expect(mergeSort(scrambledNumbers)).toEqual([1,2,3,4,5])
   })
@@ -22,8 +22,8 @@ fdescribe('#mergeSort', () => {
 })
 
 
-fdescribe('#merge', () => {
-  it('should merge two arrays into one', () => {
+describe('#merge', () => {
+  it('should merge two arrays into one in order', () => {
     expect(merge([1,4,5,2,3,6], [], 0, 2, 5)).toEqual([1,2,3,4,5,6])
   })
 })
