@@ -5,7 +5,6 @@ import Benchmark, { Suite } from 'benchmark'
 
 var filename = process.argv.slice(2)[0];
 // import fn from `./algorithms/${filename}`; // doesn't work today, may never work
-var method = require(`../algorithms/${filename}.js`).default;
 
 var sample = function(num) {
   if (sample[num]) { return sample[num] }
@@ -15,28 +14,40 @@ var sample = function(num) {
   return sample[num]
 };
 
-var handleComplete = {
+var benchmarkOption = {
   onComplete: function() {
     console.log(`${this.name}: ${this.hz} per secs`)
-  }
+  },
+  async: true
 };
 
-var sortSuite = new Suite('sortSuite', {
-  onStart () {
-    console.log('----------------START OF BENCHMARK----------------')
-  },
-  onComplete () {
-    console.log('suitComplete')
-    console.log('-----------------END OF BENCHMARK-----------------')
-    console.log()
-  }
+
+(filename ? [filename] : [
+  'merge_sort',
+  'selection_sort',
+  'insertion_sort',
+  // 'bubble_sort', 
+  'shell_sort',
+  'plain_sort'
+]).map(function(method_name) {
+  var method = require(`../algorithms/${method_name}.js`).default
+
+  var sortSuite = new Suite(`sortSuite - ${method_name}`, {
+    onStart () {
+      console.log(`----------------START OF ${method_name}----------------`)
+    },
+    onComplete () {
+      console.log(`suit completed!`)
+      console.log(`-----------------END OF ${method_name}-----------------`)
+      console.log()
+    }
+  })
+
+  sortSuite.add('10 sort',    () => { method(sample(10)) },         benchmarkOption)
+  sortSuite.add('100 sort',   () => { method(sample(100)) },        benchmarkOption)
+  sortSuite.add('1k sort',    () => { method(sample(1000)) },       benchmarkOption)
+  sortSuite.add('10k sort',   () => { method(sample(1000 * 10)) },  benchmarkOption)
+  sortSuite.add('100k sort',  () => { method(sample(1000 * 100)) }, benchmarkOption)
+
+  sortSuite.run({ async: false })
 })
-
-sortSuite.add('10 sort',    () => { method(sample(10)) },    handleComplete)
-sortSuite.add('20 sort',    () => { method(sample(20)) },    handleComplete)
-sortSuite.add('50 sort',    () => { method(sample(50)) },    handleComplete)
-sortSuite.add('100 sort',   () => { method(sample(100)) },   handleComplete)
-sortSuite.add('1000 sort',  () => { method(sample(1000)) },  handleComplete)
-sortSuite.add('10000 sort', () => { method(sample(10000)) }, handleComplete)
-
-sortSuite.run({ async: true })

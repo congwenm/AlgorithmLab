@@ -1,16 +1,16 @@
 import surgeonkit from 'surgeonkit';
-import insertionSort from '../algorithms/insertion_sort';
+import plainSort from '../algorithms/plain_sort';
 import { ascendingVerifier } from './order_verifier';
 
 var scrambledNumbers = [4,1,2,3,5];
-describe('#insertionSort', () => {
+describe('#plainSort', () => {
   it ('should sort numbers', () => {
-    expect(insertionSort(scrambledNumbers)).toEqual([1,2,3,4,5])
+    expect(plainSort(scrambledNumbers)).toEqual([1,2,3,4,5])
   })
 
   it('should sort 100 numbers', () => {
     expect(ascendingVerifier(
-      insertionSort(
+      plainSort(
         surgeonkit.expand(20).map(n => (Math.random() * 100) | 0)
       )
     )).toBe(true)
@@ -18,8 +18,8 @@ describe('#insertionSort', () => {
 
   it('should sort 1,000,000 numbers', () => {
     expect(ascendingVerifier(
-      insertionSort(
-        surgeonkit.expand(1000).map(n => (Math.random() * 1000) | 0)
+      plainSort(
+        surgeonkit.expand(1000 * 1000).map(n => (Math.random() * 1000000) | 0)
       )
     )).toBe(true)
   })
