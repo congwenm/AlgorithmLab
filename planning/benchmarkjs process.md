@@ -17,17 +17,17 @@ Each run of the tests with multiple iterations, consist of two units (first unit
 
 ## Method
 
-#### Benchmark#.count - iterations per *cycle*
+#### Benchmark#count - iterations per *cycle*
 
-#### Benchmark#.stats.sample - sampling phase runs the tests and stores the results of each cycle in here
+#### Benchmark#stats.sample - sampling phase runs the tests and stores the results of each cycle in here
 
-#### Benchmark#.cycles - stores numbers of cyles run during analysis phase
+#### Benchmark#cycles - stores numbers of cyles run during analysis phase
 
-#### Benchmark#.stats.sample - numbers of cycles run during sampling phase
+#### Benchmark#stats.sample - numbers of cycles run during sampling phase
 
-#### Benchmark#.stats - stores result, calculated and updated after each cycle.
+#### Benchmark#stats - stores result, calculated and updated after each cycle.
 
-#### Benchmark#.hz - calculated number of iterations per second. (JSperf.com)
+#### Benchmark#hz - calculated number of iterations per second. (JSperf.com)
 
 #### Benchmark#stats - various stats, mean, margin of error, standard deviation etc.
 
