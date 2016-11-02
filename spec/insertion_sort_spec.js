@@ -16,7 +16,7 @@ describe('#insertionSort', () => {
     )).toBe(true)
   })
 
-  it('should sort 1,000,000 numbers', () => {
+  it('should sort 1,000 numbers', () => {
     expect(ascendingVerifier(
       insertionSort(
         surgeonkit.expand(1000).map(n => (Math.random() * 1000) | 0)

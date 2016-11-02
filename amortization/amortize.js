@@ -16,7 +16,7 @@ var sample = function(num) {
 
 var benchmarkOption = {
   onComplete: function() {
-    console.log(`${this.name}: ${this.hz} per secs`)
+    console.log(`${this.name}: ${this.hz} per sec`)
   },
   async: true
 };
@@ -24,9 +24,10 @@ var benchmarkOption = {
 
 (filename ? [filename] : [
   'merge_sort',
+  'quick_sort',
   'selection_sort',
   'insertion_sort',
-  // 'bubble_sort', 
+  // 'bubble_sort', // too slow
   'shell_sort',
   'plain_sort'
 ]).map(function(method_name) {
