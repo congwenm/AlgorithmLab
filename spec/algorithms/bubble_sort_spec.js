@@ -1,6 +1,6 @@
 import surgeonkit from 'surgeonkit'
-import bubbleSort from '../algorithms/bubble_sort'
-import { ascendingVerifier } from './order_verifier'
+import bubbleSort from '../../algorithms/bubble_sort'
+import { ascendingVerifier } from '../order_verifier'
 
 var scrambled = [5,2,1,3,4]
 

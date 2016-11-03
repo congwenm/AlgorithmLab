@@ -1,5 +1,5 @@
 import surgeonkit from 'surgeonkit';
-import shuffle from '../algorithms/shuffle';
+import shuffle from '../../algorithms/shuffle';
 
 /* not meant to test failure but rather random distribution */
 

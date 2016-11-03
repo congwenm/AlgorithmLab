@@ -1,6 +1,6 @@
 import surgeonkit from 'surgeonkit';
-import quickSort, { partition } from '../algorithms/quick_sort';
-import { ascendingVerifier } from './order_verifier';
+import quickSort, { partition } from '../../algorithms/quick_sort';
+import { ascendingVerifier } from '../order_verifier';
 
 var scrambledNumbers = [5,1,2,3,4];
 describe('#quickSort', () => {

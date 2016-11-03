@@ -1,6 +1,6 @@
 import surgeonkit from 'surgeonkit';
-import mergeSort, { merge } from '../algorithms/merge_sort';
-import { ascendingVerifier } from './order_verifier';
+import mergeSort, { merge } from '../../algorithms/merge_sort';
+import { ascendingVerifier } from '../order_verifier';
 
 var scrambledNumbers = [5,1,2,3,4];
 describe('#mergeSort', () => {

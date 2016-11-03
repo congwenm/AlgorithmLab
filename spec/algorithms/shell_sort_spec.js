@@ -1,6 +1,6 @@
 import surgeonkit from 'surgeonkit';
-import shellSort from '../algorithms/shell_sort';
-import { ascendingVerifier } from './order_verifier';
+import shellSort from '../../algorithms/shell_sort';
+import { ascendingVerifier } from '../order_verifier';
 
 var scrambledNumbers = [5,1,2,3,4];
 describe('#shellSort', () => {
