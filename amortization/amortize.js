@@ -3,8 +3,8 @@ import surgeonkit from 'surgeonkit'
 // argv[1] is __filename
 import Benchmark, { Suite } from 'benchmark'
 
-var filename = process.argv.slice(2)[0];
-// import fn from `./algorithms/${filename}`; // doesn't work today, may never work
+var filenames = process.argv.slice(2);
+// import fn from `./algorithms/${filenames}`; // doesn't work today, may never work
 
 var sample = function(num) {
   if (sample[num]) { return sample[num] }
@@ -18,11 +18,11 @@ var benchmarkOption = {
   onComplete: function() {
     console.log(`${this.name}: ${this.hz} per sec`)
   },
-  async: true
+  // async: true
 };
 
 
-(filename ? [filename] : [
+(filenames.length ? filenames : [
   'merge_sort',
   'quick_sort',
   'selection_sort',
