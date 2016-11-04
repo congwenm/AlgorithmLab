@@ -1,18 +1,10 @@
-import surgeonkit from 'surgeonkit'
 // argv[0] is /usr/local/bin/node
 // argv[1] is __filename
 import Benchmark, { Suite } from 'benchmark'
-
+import util from './util.js'
+const { reverse_order } = util;
 var filenames = process.argv.slice(2);
 // import fn from `./algorithms/${filenames}`; // doesn't work today, may never work
-
-var sample = function(num) {
-  if (sample[num]) { return sample[num] }
-  sample[num] = surgeonkit.expand(num).map(
-    n => Math.ceil(Math.random() * num)
-  )
-  return sample[num]
-};
 
 var benchmarkOption = {
   onComplete: function() {
@@ -44,11 +36,11 @@ var benchmarkOption = {
     }
   })
 
-  sortSuite.add('10 sort',    () => { method(sample(10)) },         benchmarkOption)
-  sortSuite.add('100 sort',   () => { method(sample(100)) },        benchmarkOption)
-  sortSuite.add('1k sort',    () => { method(sample(1000)) },       benchmarkOption)
-  sortSuite.add('10k sort',   () => { method(sample(1000 * 10)) },  benchmarkOption)
-  sortSuite.add('100k sort',  () => { method(sample(1000 * 100)) }, benchmarkOption)
+  sortSuite.add('10 sort',    () => { method(reverse_order(10)) },         benchmarkOption)
+  sortSuite.add('100 sort',   () => { method(reverse_order(100)) },        benchmarkOption)
+  sortSuite.add('1k sort',    () => { method(reverse_order(1000)) },       benchmarkOption)
+  sortSuite.add('10k sort',   () => { method(reverse_order(1000 * 10)) },  benchmarkOption)
+  sortSuite.add('100k sort',  () => { method(reverse_order(1000 * 100)) }, benchmarkOption)
 
   sortSuite.run({ async: false })
 })

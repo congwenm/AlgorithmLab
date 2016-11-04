@@ -8,7 +8,9 @@
     "dev": "npm run lint && webpack-dev-server --config webpack.dev.config.js --inline",
     "lint": "./node_modules/.bin/eslint js",
     "test": "find app spec algorithms | entr babel-node spec/run.js",
-    "amortize": "babel-node ./amortization/amortize.js"
+    "amor:sort": "babel-node ./amortization/sort.js",
+    "amor": "babel-node ./amortization/index.js",
+    "amor:reverse": "babel-node ./amortization/reverse_order.js"
   },
   "author": "Yang Zhao",
   "license": "ISC",
