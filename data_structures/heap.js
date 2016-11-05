@@ -6,8 +6,9 @@ import util from '../util'
 export default class Heap {
   // we assume that array starts with index 1, 
   // so `left_child` is `2k`, and `right_child` is `2k + 1`,  parent at `k/2`
-  constructor () {
-    this.queue = [null]; 
+  constructor (init_arr = []) {
+    this.queue = [null]
+    init_arr.forEach(item => this.insert(item)) 
   }
 
   // get position of the parent
@@ -63,4 +64,15 @@ export default class Heap {
       console.log(`level ${util.padding(i+1, 3)}  ->  ${splicedPiece}`)
     }
   }
+}
+
+Heap.of = function(...args) {
+  if (Array.isArray(args[0])) {
+    args = args[0]  
+  }
+  else if (args[0] instanceof Heap) {
+    args = args[0].queue.slice(1)
+  }
+
+  return new Heap(args)
 }

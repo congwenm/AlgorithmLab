@@ -4,7 +4,7 @@ import util from '../../util'
 const { reverse_order, ordered } = util
 const { expand } = surgeonkit
 
-fdescribe('#heap', () => {
+describe('#Heap', () => {
   var heap;
   beforeEach(() => {
     heap = new Heap()
@@ -34,4 +34,30 @@ fdescribe('#heap', () => {
     orded_arr.forEach(n => heap.insert(n))
     expect(Math.max(...heap.queue)).toEqual(heap.queue[1])
   })  
+
+  function expectations(heap) {
+    expect(heap.queue).toEqual([null, 2,1])
+  }
+
+  describe('#constructor', function() {
+    it('should construct heap from array', function() {
+      var heap = new Heap([1,2])
+      expectations(heap)
+    })
+  })
+
+  describe('#of', function() {
+    it('should convert array to a heap, even though this isnt part of Array#of', function() {
+      var heap = Heap.of([1,2])
+      expectations(heap)
+    })
+    it('should convert a number of args into a heap', function() {
+      var heap = Heap.of(1,2)
+      expectations(heap)
+    })
+    it('should convert a heap into a heap', function() {
+      var heap = Heap.of(new Heap([1,2]))
+      expectations(heap)
+    })
+  })
 })
