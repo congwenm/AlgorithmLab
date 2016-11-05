@@ -1,7 +1,7 @@
 // argv[0] is /usr/local/bin/node
 // argv[1] is __filename
 import Benchmark, { Suite } from 'benchmark'
-import util from './util.js'
+import util from '../util.js'
 const { reverse_order } = util;
 var filenames = process.argv.slice(2);
 // import fn from `./algorithms/${filenames}`; // doesn't work today, may never work

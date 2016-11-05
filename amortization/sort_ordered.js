@@ -1,10 +1,8 @@
-import surgeonkit from 'surgeonkit'
 // argv[0] is /usr/local/bin/node
 // argv[1] is __filename
 import Benchmark, { Suite } from 'benchmark'
 import util from '../util.js'
-const { sample } = util;
-
+const { ordered } = util;
 var filenames = process.argv.slice(2);
 // import fn from `./algorithms/${filenames}`; // doesn't work today, may never work
 
@@ -38,11 +36,11 @@ var benchmarkOption = {
     }
   })
 
-  sortSuite.add('10 sort',    () => { method(sample(10)) },         benchmarkOption)
-  sortSuite.add('100 sort',   () => { method(sample(100)) },        benchmarkOption)
-  sortSuite.add('1k sort',    () => { method(sample(1000)) },       benchmarkOption)
-  sortSuite.add('10k sort',   () => { method(sample(1000 * 10)) },  benchmarkOption)
-  sortSuite.add('100k sort',  () => { method(sample(1000 * 100)) }, benchmarkOption)
+  sortSuite.add('10 sort',    () => { method(ordered(10)) },         benchmarkOption)
+  sortSuite.add('100 sort',   () => { method(ordered(100)) },        benchmarkOption)
+  sortSuite.add('1k sort',    () => { method(ordered(1000)) },       benchmarkOption)
+  sortSuite.add('10k sort',   () => { method(ordered(1000 * 10)) },  benchmarkOption)
+  sortSuite.add('100k sort',  () => { method(ordered(1000 * 100)) }, benchmarkOption)
 
   sortSuite.run({ async: false })
 })
