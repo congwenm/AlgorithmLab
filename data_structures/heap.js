@@ -1,5 +1,6 @@
 const { floor, log, pow } = Math
 import util from '../util'
+const { max_by } = util
 
 // by default implemented a Max-Heap
 // can subclass ES6 Array? perhaps?
@@ -9,6 +10,31 @@ export default class Heap {
   constructor (init_arr = []) {
     this.queue = [null]
     init_arr.forEach(item => this.insert(item)) 
+  }
+
+  extract_root () {
+    var root = -1; // root index
+    if (this.queue.length <= 0) { 
+      console.warn('empty priority queue.\n')
+    }
+    else {
+      root = this.queue[1]
+
+      this.queue[1] = this.queue[this.queue.length - 1]
+      this.bubble_down(1)
+    }
+    return root
+  }
+
+  bubble_down (p) {
+    var max_index = max_by([
+      this.right_child(p), this.left_child(p)
+    ], index => this.queue[index])
+
+    if (max_index != p) {
+      this.swap(p, max_index)
+      this.bubble_down(max_index)
+    }
   }
 
   // get position of the parent
@@ -66,6 +92,7 @@ export default class Heap {
   }
 }
 
+// this is naming convention borrowed from Javascript to account for #make_heap in the book
 Heap.of = function(...args) {
   if (Array.isArray(args[0])) {
     args = args[0]  

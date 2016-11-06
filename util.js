@@ -25,9 +25,20 @@ var padding = function(val, number, direction) {
   return (pad + val.toString()).slice(-number)
 }
 
+var max_by = function(arr, callback) {
+  arr = arr.map(indice => ({ indice, value: callback(indice) }))
+
+  var max = arr.reduce(
+    (max, element) =>  max.value >= element.value ? max : element
+  , arr[0])
+
+  return max.indice
+}
+
 export default {
   sample,
   ordered,
   padding,
   reverse_order,
+  max_by,
 }

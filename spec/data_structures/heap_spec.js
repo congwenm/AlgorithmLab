@@ -16,11 +16,14 @@ describe('#Heap', () => {
     heap.insert(2) // swap 2 with 1
     heap.insert(3) // swap 3 with 2
     heap.insert(4) // swap 4 with 1, 4 with 3
+    heap.insert(5) // swap 4 with 1, 4 with 3
     // heap.print()
-    expect(heap.queue[1]).toBe(4) 
-    expect(heap.queue[2]).toBe(3)
+    // 5,4,2,1,3
+    expect(heap.queue[1]).toBe(5) 
+    expect(heap.queue[2]).toBe(4)
     expect(heap.queue[3]).toBe(2)
     expect(heap.queue[4]).toBe(1)
+    expect(heap.queue[5]).toBe(3)
   })
 
   it('expect heap to not swap at all if inserted at reverse_order', function() {
@@ -58,6 +61,22 @@ describe('#Heap', () => {
     it('should convert a heap into a heap', function() {
       var heap = Heap.of(new Heap([1,2]))
       expectations(heap)
+    })
+  })
+
+  fdescribe('#extract_root', function() {
+    it('should remove the the root of the queue and bubble down the changes', function() {
+      heap.insert(1)
+      heap.insert(2) // swap 2 with 1
+      heap.insert(3) // swap 3 with 2
+      heap.insert(4) // swap 4 with 1, 4 with 3
+      heap.insert(5) // swap 5 with 3, 5 with 4, 5 4 2 1 3
+      heap.print()
+      expect(heap.extract_root()).toBe(4)
+      expect(heap.queue[1]).toBe(3) 
+      expect(heap.queue[2]).toBe(2)
+      expect(heap.queue[3]).toBe(1)
+      // heap.print()
     })
   })
 })
