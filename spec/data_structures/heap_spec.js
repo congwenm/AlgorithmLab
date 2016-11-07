@@ -3,6 +3,7 @@ import surgeonkit from 'surgeonkit'
 import util from '../../util'
 const { reverse_order, ordered } = util
 const { expand } = surgeonkit
+import { descendingVerifier } from '../order_verifier';
 
 describe('#Heap', () => {
   var heap;
@@ -64,7 +65,7 @@ describe('#Heap', () => {
     })
   })
 
-  fdescribe('#extract_root', function() {
+  describe('#extract_root', function() {
     it('should remove the the root of the queue and bubble down the changes', function() {
       heap.insert(1)
       heap.insert(2) // swap 2 with 1
@@ -72,11 +73,42 @@ describe('#Heap', () => {
       heap.insert(4) // swap 4 with 1, 4 with 3
       heap.insert(5) // swap 5 with 3, 5 with 4, 5 4 2 1 3
       heap.print()
-      expect(heap.extract_root()).toBe(4)
-      expect(heap.queue[1]).toBe(3) 
-      expect(heap.queue[2]).toBe(2)
-      expect(heap.queue[3]).toBe(1)
+      expect(heap.extract_root()).toBe(5)
+      expect(heap.queue[1]).toBe(4) 
+      expect(heap.queue[2]).toBe(3)
+      expect(heap.queue[3]).toBe(2)
+      expect(heap.queue[4]).toBe(1)
       // heap.print()
+    })
+
+    it('should extract fine with array [ null, 6, 4, 5, 1, 3, 2 ] ', function() {
+      heap.queue = [ null, 6, 4, 5, 1, 3, 2 ];
+      expect(heap.extract_root()).toBe(6)
+      expect(heap.queue).toEqual([null, 5, 4, 2, 1, 3])
+    )
+  })
+
+  describe('#heapsort', function() {
+    it('should extract out items in sorted order', function() {
+      expect(Heap.heap_sort([
+        7,6,5,4,3,2,1,8,9
+      ])).toEqual([9,8,7,6,5,4,3,2,1])
+    })
+
+    it('should sort out 20 items in order', function() {
+      expect(descendingVerifier(
+        Heap.heap_sort(
+          surgeonkit.expand(20).map(n => (Math.random() * 20) | 0)
+        )
+      )).toBe(true)
+    })
+
+    it('should sort out 100 items in order', function() {
+      expect(descendingVerifier(
+        Heap.heap_sort(
+          surgeonkit.expand(100).map(n => (Math.random() * 100) | 0)
+        )
+      )).toBe(true)
     })
   })
 })

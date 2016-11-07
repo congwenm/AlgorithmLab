@@ -21,17 +21,19 @@ export default class Heap {
       root = this.queue[1]
 
       this.queue[1] = this.queue[this.queue.length - 1]
+      this.queue = this.queue.slice(0, -1) // remove last element
       this.bubble_down(1)
     }
     return root
   }
 
   bubble_down (p) {
-    var max_index = max_by([
-      this.right_child(p), this.left_child(p)
-    ], index => this.queue[index])
+    var max_index = max_by(
+      [p, this.right_child(p), this.left_child(p)],
+      index => this.queue[index] || -Infinity
+    )
 
-    if (max_index != p) {
+    if (max_index !== p) {
       this.swap(p, max_index)
       this.bubble_down(max_index)
     }
@@ -85,9 +87,8 @@ export default class Heap {
     arr.splice(0, 1) // get rid of first padding elem (null)
 
     // j will be length of second to bottom level when loop terminates
-    for (let i = 0, j = 1; arr.length; j = Math.pow(2, ++i))  {
+    for (let i = 0, j = 1; arr.length > 0; j = Math.pow(2, ++i))  {
       var splicedPiece = arr.splice(0, j)
-      console.log(`level ${util.padding(i+1, 3)}  ->  ${splicedPiece}`)
     }
   }
 }
@@ -102,4 +103,15 @@ Heap.of = function(...args) {
   }
 
   return new Heap(args)
+}
+
+Heap.heap_sort = function(items) {
+  var heap = Heap.of(items)
+  var arr = []
+  for(let item; heap.queue.length > 1;) {
+    item = heap.extract_root()
+    // console.log('extracted root', item)
+    arr.push(item);
+  }
+  return arr
 }
