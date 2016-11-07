@@ -5,16 +5,16 @@ const { max_by } = util
 // by default implemented a Max-Heap
 // can subclass ES6 Array? perhaps?
 export default class Heap {
-  // we assume that array starts with index 1, 
+  // we assume that array starts with index 1,
   // so `left_child` is `2k`, and `right_child` is `2k + 1`,  parent at `k/2`
   constructor (init_arr = []) {
     this.queue = [null]
-    init_arr.forEach(item => this.insert(item)) 
+    init_arr.forEach(item => this.insert(item))
   }
 
   extract_root () {
     var root = -1; // root index
-    if (this.queue.length <= 0) { 
+    if (this.queue.length <= 0) {
       console.warn('empty priority queue.\n')
     }
     else {
@@ -41,10 +41,10 @@ export default class Heap {
 
   // get position of the parent
   parent_indice (n) {
-    if (n === 1) {return -1 } 
+    if (n === 1) {return -1 }
     else { return floor(n / 2) }
   }
-  
+
   // get children
   left_child (n) {return 2 * n; }
   right_child (n) {return 2 * n + 1; }
@@ -62,10 +62,10 @@ export default class Heap {
   bubble_up (p) {
     // console.log('bubble_up is called with child index', p)
     // console.log(`parent_index: ${this.parent_indice(p)}, child_indx: ${p}`)
-    
+
     var parentIndex = this.parent_indice(p)
     // at root of heap, no need to bubble
-    if (parentIndex === -1) { return null; }   
+    if (parentIndex === -1) { return null; }
 
     // < is max_heap, > is min_heap
     // console.log(`compare values, ${this.queue[parentIndex]} vs. ${this.queue[p]}`)
@@ -96,22 +96,11 @@ export default class Heap {
 // this is naming convention borrowed from Javascript to account for #make_heap in the book
 Heap.of = function(...args) {
   if (Array.isArray(args[0])) {
-    args = args[0]  
+    args = args[0]
   }
   else if (args[0] instanceof Heap) {
     args = args[0].queue.slice(1)
   }
 
   return new Heap(args)
-}
-
-Heap.heap_sort = function(items) {
-  var heap = Heap.of(items)
-  var arr = []
-  for(let item; heap.queue.length > 1;) {
-    item = heap.extract_root()
-    // console.log('extracted root', item)
-    arr.push(item);
-  }
-  return arr
 }

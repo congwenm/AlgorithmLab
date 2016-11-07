@@ -21,6 +21,7 @@ var benchmarkOption = {
   'quick_sort',
   'selection_sort',
   'insertion_sort',
+  'heap_sort',
   // 'bubble_sort', // too slow
   'shell_sort',
   'plain_sort'
