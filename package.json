@@ -7,11 +7,11 @@
     "build": "npm run lint && webpack --config webpack.config.js -p",
     "dev": "npm run lint && webpack-dev-server --config webpack.dev.config.js --inline",
     "lint": "./node_modules/.bin/eslint js",
-    "test": "find data_structures app spec algorithms | entr babel-node spec/run.js",
-    "amor:sort": "babel-node ./amortization/sort.js",
+    "test": "find app spec src | entr babel-node spec/run.js",
+    "amor:sort": "babel-node ./benchmarks/amortize/sort.js",
     "amor": "babel-node ./amortization/index.js",
-    "amor:reverse": "babel-node ./amortization/sort_reverse_order.js",
-    "amor:ordered": "babel-node ./amortization/sort_ordered.js"
+    "amor:reverse": "babel-node ./benchmarks/amortize/sort_reverse_order.js",
+    "amor:ordered": "babel-node ./benchmarks/amortize/sort_ordered.js"
   },
   "author": "Yang Zhao",
   "license": "ISC",

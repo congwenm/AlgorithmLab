@@ -1,6 +1,6 @@
 import surgeonkit from 'surgeonkit';
-import paullewisQuickSort, { partition } from '../../../algorithms/implementations/paullewis_quick_sort';
-import { ascendingVerifier } from '../../order_verifier';
+import paullewisQuickSort, { partition } from '../../../src/sorting/implementations/paullewis_quick_sort';
+import { ascendingVerifier } from '../../../src/util'
 
 var scrambledNumbers = [5,1,2,3,4];
 describe('#paullewisQuickSort', () => {

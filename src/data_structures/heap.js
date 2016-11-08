@@ -1,6 +1,5 @@
+import { max_by } from '../util'
 const { floor, log, pow } = Math
-import util from '../util'
-const { max_by } = util
 
 // by default implemented a Max-Heap
 // can subclass ES6 Array? perhaps?

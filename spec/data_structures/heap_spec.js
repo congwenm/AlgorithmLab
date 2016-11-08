@@ -1,6 +1,5 @@
-import Heap from '../../data_structures/heap'
-import util from '../../util'
-const { reverse_order, ordered } = util
+import Heap from '../../src/data_structures/heap'
+import { reverse_order, ordered } from '../../src/util'
 
 describe('#Heap', () => {
   var heap;

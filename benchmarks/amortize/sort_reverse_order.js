@@ -1,8 +1,8 @@
 // argv[0] is /usr/local/bin/node
 // argv[1] is __filename
 import Benchmark, { Suite } from 'benchmark'
-import util from '../util.js'
-const { reverse_order } = util;
+import { reverse_order } from '../../src/util'
+
 var filenames = process.argv.slice(2);
 // import fn from `./algorithms/${filenames}`; // doesn't work today, may never work
 
@@ -23,7 +23,7 @@ var benchmarkOption = {
   'shell_sort',
   'plain_sort'
 ]).map(function(method_name) {
-  var method = require(`../algorithms/${method_name}.js`).default
+  var method = require(`../../src/sorting/${method_name}.js`).default
 
   var sortSuite = new Suite(`sortSuite - ${method_name}`, {
     onStart () {

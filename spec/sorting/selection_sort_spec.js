@@ -1,6 +1,4 @@
-import surgeonkit from 'surgeonkit';
-import selectionSort from '../../algorithms/selection_sort';
-import { ascendingVerifier } from '../order_verifier';
+import selectionSort from '../../src/sorting/selection_sort';
 
 var scrambledNumbers = [5,1,2,3,4];
 describe('#selectionSort', () => {
@@ -11,7 +9,7 @@ describe('#selectionSort', () => {
   it('should sort 100 numbers', () => {
     expect(ascendingVerifier(
       selectionSort(
-        surgeonkit.expand(20).map(n => (Math.random() * 100) | 0)
+        expand(20).map(n => (Math.random() * 100) | 0)
       )
     )).toBe(true)
   })

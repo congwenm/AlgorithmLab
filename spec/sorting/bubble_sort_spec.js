@@ -1,6 +1,4 @@
-import surgeonkit from 'surgeonkit'
-import bubbleSort from '../../algorithms/bubble_sort'
-import { ascendingVerifier } from '../order_verifier'
+import bubbleSort from '../../src/sorting/bubble_sort'
 
 var scrambled = [5,2,1,3,4]
 
@@ -12,7 +10,7 @@ describe('bubbleSort', () => {
   it('should sort 100 numbers into the correct order', () => 
     expect(
       ascendingVerifier(
-        surgeonkit.expand(100).map(n => Math.ceil(Math.random(100)))
+        expand(100).map(n => Math.ceil(Math.random(100)))
       )
     ).toBe(true)
   )

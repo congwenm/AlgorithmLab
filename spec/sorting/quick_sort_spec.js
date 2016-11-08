@@ -1,6 +1,4 @@
-import surgeonkit from 'surgeonkit';
-import quickSort, { partition } from '../../algorithms/quick_sort';
-import { ascendingVerifier } from '../order_verifier';
+import quickSort, { partition } from '../../src/sorting/quick_sort';
 
 var scrambledNumbers = [5,1,2,3,4];
 describe('#quickSort', () => {
@@ -11,7 +9,7 @@ describe('#quickSort', () => {
   it('should sort 100 numbers', () => {
     expect(ascendingVerifier(
       quickSort(
-        surgeonkit.expand(100).map(n => (Math.random() * 100) | 0)
+        expand(100).map(n => (Math.random() * 100) | 0)
       )
     )).toBe(true)
   })
@@ -19,7 +17,7 @@ describe('#quickSort', () => {
   xit('should sort 1,000 numbers', () => {
     expect(ascendingVerifier(
       quickSort(
-        surgeonkit.expand(1000).map(n => (Math.random() * 1000) | 0)
+        expand(1000).map(n => (Math.random() * 1000) | 0)
       )
     )).toBe(true)
   })

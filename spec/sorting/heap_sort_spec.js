@@ -1,7 +1,4 @@
-import surgeonkit from 'surgeonkit'
-import heap_sort from '../../algorithms/heap_sort';
-const { expand } = surgeonkit
-import { descendingVerifier } from '../order_verifier';
+import heap_sort from '../../src/sorting/heap_sort';
 
 describe('#heapsort', function() {
   it('should extract out items in sorted order', function() {
