@@ -26,6 +26,7 @@ export default class Heap {
     return root
   }
 
+  // take item with this index (p) and compare it to its child, swap with the child thats more extreme than current index
   bubble_down (p) {
     var max_index = max_by(
       [p, this.right_child(p), this.left_child(p)],
@@ -90,16 +91,36 @@ export default class Heap {
       var splicedPiece = arr.splice(0, j)
     }
   }
+
+  heap_compare(i, count, x) {
+    if ((count <= 0) || (i > this.queue.length - 1)) {
+      return count
+    }
+    if (this.queue[i] < x) {
+      count = heap_sort(this.queue, this.left_child(i), count - 1, x)
+      count = heap_sort(this.queue, this.right_child(i), count, x)
+    }
+    return count;
+  }
 }
 
 // this is naming convention borrowed from Javascript to account for #make_heap in the book
-Heap.of = function(...args) {
-  if (Array.isArray(args[0])) {
-    args = args[0]
-  }
-  else if (args[0] instanceof Heap) {
-    args = args[0].queue.slice(1)
+Heap.of = function(args) {
+  if (args instanceof Heap) {
+    args = args.queue.slice(1)
   }
 
   return new Heap(args)
+}
+
+// faster heap construction*, converges to linear as opopose to the actual constructor which construct at O(n log n)
+Heap.BubbleDownConstructor = function(init_arr = []) {
+  var heap = new Heap()
+  heap.queue.push(...init_arr)
+  // heap.queue.reduceRight((zero, item, index) => item !== null && heap.bubble_down(index), 0)
+  for (let i = heap.queue.length - 1; i >= 1; i--) {
+    console.log('bubbling down', i, heap.queue)
+    heap.bubble_down(i)
+  }
+  return heap
 }

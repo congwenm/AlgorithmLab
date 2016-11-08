@@ -9,9 +9,9 @@
     "lint": "./node_modules/.bin/eslint js",
     "test": "find app spec src | entr babel-node spec/run.js",
     "amor:sort": "babel-node ./benchmarks/amortize/sort.js",
-    "amor": "babel-node ./amortization/index.js",
     "amor:reverse": "babel-node ./benchmarks/amortize/sort_reverse_order.js",
-    "amor:ordered": "babel-node ./benchmarks/amortize/sort_ordered.js"
+    "amor:ordered": "babel-node ./benchmarks/amortize/sort_ordered.js",
+    "amor": "babel-node ./amortization/index.js"
   },
   "author": "Yang Zhao",
   "license": "ISC",

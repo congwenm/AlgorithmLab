@@ -8,14 +8,25 @@ describe('#Heap', () => {
     // heap.print.call({ queue: expand(17) })
   })
 
+  describe('##constructors', function() {
+    it('#of', function() {
+      expect(Heap.of([1,2,3,4]).queue).toEqual([null,4,3,2,1])
+    })
+
+    it('#BubbleDownConstructor', function() {
+      expect(
+        new Heap.BubbleDownConstructor([1,2,3,4]).queue
+      ).toEqual([null,4,2,3,1])
+    })
+  })
+
   it('expect heap to be 4, 3, 2, 1', function() {
     heap.insert(1)
     heap.insert(2) // swap 2 with 1
     heap.insert(3) // swap 3 with 2
     heap.insert(4) // swap 4 with 1, 4 with 3
     heap.insert(5) // swap 4 with 1, 4 with 3
-    // heap.print()
-    // 5,4,2,1,3
+    // heap.print() // 5,4,2,1,3
     expect(heap.queue[1]).toBe(5)
     expect(heap.queue[2]).toBe(4)
     expect(heap.queue[3]).toBe(2)
@@ -49,10 +60,6 @@ describe('#Heap', () => {
   describe('#of', function() {
     it('should convert array to a heap, even though this isnt part of Array#of', function() {
       var heap = Heap.of([1,2])
-      expectations(heap)
-    })
-    it('should convert a number of args into a heap', function() {
-      var heap = Heap.of(1,2)
       expectations(heap)
     })
     it('should convert a heap into a heap', function() {
