@@ -9,6 +9,13 @@ export const sample = function(num) {
   )
 };
 
+export const sampleNoCache = function(num) {
+  return surgeonkit.expand(num).map(
+    n => Math.ceil(Math.random() * num)
+  )
+};
+
+
 export const ordered = function(num) {
   if(ordered[num]) { return ordered[num]; }
   return ordered[num] = surgeonkit.expand(num).map(
@@ -22,7 +29,7 @@ export const reverse_order = function(num) {
 }
 
 export const padding = function(val, number, direction) {
-  var pad = surgeonkit.expand(number).map(n => ' ').join('') 
+  var pad = surgeonkit.expand(number).map(n => ' ').join('')
   return (pad + val.toString()).slice(-number)
 }
 

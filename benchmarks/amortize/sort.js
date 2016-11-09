@@ -42,7 +42,7 @@ var benchmarkOption = {
   sortSuite.add('100 sort',   () => { method(sample(100)) },        benchmarkOption)
   sortSuite.add('1k sort',    () => { method(sample(1000)) },       benchmarkOption)
   sortSuite.add('10k sort',   () => { method(sample(1000 * 10)) },  benchmarkOption)
-  sortSuite.add('100k sort',  () => { method(sample(1000 * 100)) }, benchmarkOption)
+  // sortSuite.add('100k sort',  () => { method(sample(1000 * 100)) }, benchmarkOption)
 
   sortSuite.run({ async: false })
 })
