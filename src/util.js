@@ -2,14 +2,14 @@ import surgeonkit from 'surgeonkit'
 
 // methods that generates data implements caching to avoid data generation becoming part of the benchmark
 
-export const sample = function(num) {
+export const sampleWithCache = function(num) {
   if (sample[num]) { return sample[num]; }
   return sample[num] = surgeonkit.expand(num).map(
     n => Math.ceil(Math.random() * num)
   )
 };
 
-export const sampleNoCache = function(num) {
+export const sample = function(num) {
   return surgeonkit.expand(num).map(
     n => Math.ceil(Math.random() * num)
   )
@@ -75,6 +75,7 @@ export const descendingVerifier = (arr) => {
 
 export default {
   sample,
+  sampleWithCache,
   ordered,
   padding,
   reverse_order,
