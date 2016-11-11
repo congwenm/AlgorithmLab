@@ -7,6 +7,7 @@ export default class Heap {
   // we assume that array starts with index 1,
   // so `left_child` is `2k`, and `right_child` is `2k + 1`,  parent at `k/2`
   constructor (init_arr = []) {
+    // console.log('constructor called x times')
     this.queue = [null]
     init_arr.forEach(item => this.insert(item))
   }
@@ -14,7 +15,7 @@ export default class Heap {
   extract_root () {
     var root = -1; // root index
     if (this.queue.length <= 0) {
-      console.warn('empty priority queue.\n')
+      // console.warn('empty priority queue.\n')
     }
     else {
       root = this.queue[1]
@@ -119,7 +120,6 @@ Heap.BubbleDownConstructor = function(init_arr = []) {
   heap.queue.push(...init_arr)
   // heap.queue.reduceRight((zero, item, index) => item !== null && heap.bubble_down(index), 0)
   for (let i = heap.queue.length - 1; i >= 1; i--) {
-    console.log('bubbling down', i, heap.queue)
     heap.bubble_down(i)
   }
   return heap

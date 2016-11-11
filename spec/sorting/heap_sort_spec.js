@@ -23,11 +23,11 @@ fdescribe('#heapsort', function() {
     )).toBe(true)
   })
 
-  fit('should sort out 10 * 1000 items in order', function() {
+  it('should sort out 10 * 1000 items in order', function() {
     expect(descendingVerifier(
       heap_sort(
         expand(10000).map(n => (Math.random() * 10000) | 0)
       )
-    )).toBe(true)
+    )).toBe(true)    
   })
 })
