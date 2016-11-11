@@ -1,6 +1,6 @@
 import heap_sort from '../../src/sorting/heap_sort';
 
-fdescribe('#heapsort', function() {
+describe('#heapsort', function() {
   it('should extract out items in sorted order', function() {
     expect(heap_sort([
       7,6,5,4,3,2,1,8,9
