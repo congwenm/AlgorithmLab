@@ -30,8 +30,8 @@ export default class Heap {
   // take item with this index (p) and compare it to its child, swap with the child thats more extreme than current index
   bubble_down (p) {
     var max_index = max_by(
-      [p, this.right_child(p), this.left_child(p)],
-      index => this.queue[index] || -Infinity
+      [p, this.right_child(p), this.left_child(p)], // indices
+      index => this.queue[index] || -1
     )
 
     if (max_index !== p) {
@@ -116,10 +116,10 @@ Heap.of = function(args) {
 
 // faster heap construction*, converges to linear as opopose to the actual constructor which construct at O(n log n)
 Heap.BubbleDownConstructor = function(init_arr = []) {
-  var heap = new Heap()
+  var heap = new Heap
   heap.queue.push(...init_arr)
   // heap.queue.reduceRight((zero, item, index) => item !== null && heap.bubble_down(index), 0)
-  for (let i = heap.queue.length - 1; i >= 1; i--) {
+  for (let i = Math.floor((heap.queue.length - 1) / 2); i >= 1; i--) {
     heap.bubble_down(i)
   }
   return heap

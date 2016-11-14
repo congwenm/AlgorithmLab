@@ -34,13 +34,17 @@ export const padding = function(val, number, direction) {
 }
 
 export const max_by = function(arr, callback) {
-  arr = arr.map(indice => ({ indice, value: callback(indice) }))
-
-  var max = arr.reduce(
-    (max, element) =>  max.value >= element.value ? max : element
-  , arr[0])
-
-  return max.indice
+  var maxValue = 0
+  var maxIndice
+  var tempValue
+  for (let i = 0; i < arr.length; i++) {
+    tempValue = callback(arr[i])
+    if (maxValue < tempValue) {
+      maxValue = tempValue
+      maxIndice = arr[i]
+    }
+  }
+  return maxIndice
 }
 
 export const shuffle = function(arr, { lo, hi, mutable = false } = {}) {
