@@ -5,7 +5,6 @@ import Benchmark, { Suite } from 'benchmark'
 import { sample } from '../../src/util'
 
 var filenames = process.argv.slice(2);
-// import fn from `./algorithms/${filenames}`; // doesn't work today, may never work
 
 var benchmarkOption = {
   onComplete: function() {

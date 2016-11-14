@@ -11,7 +11,7 @@ const shared_expectations = function(qf) {
   expect(qf.find(4,5)).toBe(false)    
 }
 
-fdescribe('QuickFind', () => {
+describe('QuickFind', () => {
   var qf;
   beforeEach(() => {
     qf = new QuickFind(10, [
@@ -29,7 +29,7 @@ fdescribe('QuickFind', () => {
   it('should be in this order', () => expect(qf.id).toEqual([0,1,9,9,9,6,6,7,0,9]) )
 })
 
-fdescribe('QuickUnion', () => {
+describe('QuickUnion', () => {
   var qu;
   beforeEach(() => {
     qu = new QuickUnion(10, [
@@ -47,7 +47,7 @@ fdescribe('QuickUnion', () => {
   it('should be in this order', () => expect(qu.id).toEqual([0,1,9,4,9,6,6,7,0,9]) )
 })
 
-fdescribe('WeightedQuickUnion', () => {
+describe('WeightedQuickUnion', () => {
   var wqu;
   beforeEach(() => {
     wqu = new WeightedQuickUnion(10, [
