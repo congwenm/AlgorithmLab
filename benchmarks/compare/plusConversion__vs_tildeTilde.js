@@ -22,3 +22,6 @@ suite.add('tilde~tilde', function() {
 })
 
 .run({ async: true })
+
+// tilde~tilde  x 21,902,823 ops/sec ±1.45% (75 runs sampled)
+// Number       x 75,883,981 ops/sec ±1.55% (78 runs sampled)
