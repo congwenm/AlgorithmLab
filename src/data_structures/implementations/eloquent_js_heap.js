@@ -71,6 +71,8 @@ BinaryHeap.prototype = {
     }
   },
 
+  countSwap: function() { },
+
   sinkDown: function(n) {
     // Look up the target element and its score.
     var length = this.content.length,
@@ -103,6 +105,7 @@ BinaryHeap.prototype = {
       // No need to swap further, we are done.
       if (swap == null) break;
 
+      this.countSwap()
       // Otherwise, swap and continue.
       this.content[n] = this.content[swap];
       this.content[swap] = element;

@@ -21,7 +21,7 @@ export default class Heap {
       root = this.queue[1]
 
       this.queue[1] = this.queue[this.queue.length - 1]
-      this.queue = this.queue.slice(0, -1) // remove last element
+      this.queue.pop() // remove last element
       this.bubble_down(1)
     }
     return root
@@ -29,14 +29,56 @@ export default class Heap {
 
   // take item with this index (p) and compare it to its child, swap with the child thats more extreme than current index
   bubble_down (p) {
-    var max_index = max_by(
-      [p, this.right_child(p), this.left_child(p)], // indices
-      index => this.queue[index] || -1
-    )
+    // var max_index = max_by(
+    //   [p, this.right_child(p), this.left_child(p)], // indices
+    //   index => this.queue[index] || -1 // scoring function
+    // )
 
-    if (max_index !== p) {
-      this.swap(p, max_index)
-      this.bubble_down(max_index)
+    // var max_index = p
+    // var left_child_index = this.left_child(p)
+    // var right_child_index = this.right_child(p)
+    // if (this.queue[left_child_index] > this.queue[max_index]) {
+    //   max_index = left_child_index
+    // }
+    // if (this.queue[right_child_index] > this.queue[max_index]) {
+    //   max_index = right_child_index
+    // }
+    //
+    // if (max_index !== p) {
+    //   this.swap(p, max_index)
+    //   this.bubble_down(max_index)
+    // }
+
+
+  //   // latest and greatest
+    var length = this.queue.length;
+    var element = this.queue[p]
+
+    while(true) {
+      var child1N = this.left_child(p)
+      var child2N = this.right_child(p)
+
+      var swap = null
+      if(child1N < length) {
+        var child1 = this.queue[child1N]
+
+        if (child1 > element)
+          swap = child1N
+      }
+
+      if (child2N < length) {
+        var child2 = this.queue[child2N]
+        if(child2 > (swap === null ? element : this.queue[child1N]))
+          swap = child2N
+      }
+
+      if (swap == null) {
+        break;
+      }
+
+      this.queue[p] = this.queue[swap]
+      this.queue[swap] = element
+      p = swap
     }
   }
 
