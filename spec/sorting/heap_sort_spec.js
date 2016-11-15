@@ -28,6 +28,6 @@ describe('#heapsort', function() {
       heap_sort(
         expand(10000).map(n => (Math.random() * 10000) | 0)
       )
-    )).toBe(true)    
+    )).toBe(true)
   })
 })

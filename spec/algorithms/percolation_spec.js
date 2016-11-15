@@ -49,10 +49,10 @@ describe('Percolation', function() {
   })
 
   it('#stats percolation of 50% filled grids', function() {
-    var percolations = Array(101).join('a').split('a').map(n => 
+    var percolations = Array(101).join('a').split('a').map(n =>
       new Percolation(generateGrid(10, .50))
     )
-    console.log('out of 100 percolations of 50% filled grid, this many are percolated:')
-    console.log(percolations.map(p => p.isPercolated()).filter(is => is).length)
+    // console.log('out of 100 percolations of 50% filled grid, this many are percolated:')
+    // console.log(percolations.map(p => p.isPercolated()).filter(is => is).length)
   })
 })
