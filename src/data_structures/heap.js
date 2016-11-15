@@ -31,7 +31,7 @@ export default class Heap {
   bubble_down (p) {
     var max_index = max_by(
       [p, this.right_child(p), this.left_child(p)], // indices
-      index => this.queue[index] || -1
+      index => this.queue[index] || -1 // scoring function
     )
 
     if (max_index !== p) {
