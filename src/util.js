@@ -39,7 +39,7 @@ export const max_by = function(arr, callback) {
   var tempValue
   for (let i = 0; i < arr.length; i++) {
     tempValue = callback(arr[i])
-    if (maxValue < tempValue) {
+    if (!maxValue || maxValue < tempValue) {
       maxValue = tempValue
       maxIndice = arr[i]
     }

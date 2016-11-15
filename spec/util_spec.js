@@ -1,6 +1,6 @@
 import surgeonkit from 'surgeonkit'
 import util from '../src/util'
-const { shuffle, ascendingVerifier, descendingVerifier } = util
+const { shuffle, ascendingVerifier, descendingVerifier, max_by } = util
 
 /* not meant to test failure but rather random distribution */
 
