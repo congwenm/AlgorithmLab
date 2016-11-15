@@ -21,7 +21,7 @@ export default class Heap {
       root = this.queue[1]
 
       this.queue[1] = this.queue[this.queue.length - 1]
-      this.queue = this.queue.slice(0, -1) // remove last element
+      this.queue.pop() // remove last element
       this.bubble_down(1)
     }
     return root
