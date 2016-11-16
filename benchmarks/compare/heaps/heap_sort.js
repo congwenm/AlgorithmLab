@@ -28,29 +28,29 @@ data.forEach(datum => {
   .run({async: false}) // run size 10, reg vs bubbledown, size 100: reg vs bubble down, size 1000...
 })
 
-
-// cycle report:  My Heap Sort: 10 x 213,645 ops/sec ±1.03% (85 runs sampled)
-// cycle report:  Eloquent JS Implementation Heap Sort x 1,760,807 ops/sec ±1.78% (85 runs sampled)
+// Eloquent implementation of my heap sort
+// cycle report:  My Heap Sort: 10 x 332,481 ops/sec ±1.25% (87 runs sampled)
+// cycle report:  Eloquent JS Implementation Heap Sort x 1,672,887 ops/sec ±1.42% (85 runs sampled)
 // Fastest is Eloquent JS Implementation Heap Sort
 // ---End---
 //
-// cycle report:  My Heap Sort: 100 x 12,943 ops/sec ±2.76% (81 runs sampled)
-// cycle report:  Eloquent JS Implementation Heap Sort x 109,979 ops/sec ±1.97% (85 runs sampled)
+// cycle report:  My Heap Sort: 100 x 30,895 ops/sec ±2.93% (79 runs sampled)
+// cycle report:  Eloquent JS Implementation Heap Sort x 103,485 ops/sec ±1.85% (88 runs sampled)
+// Fastest is Eloquent JS Implementation Heap Sort
 //
+// ---End---
+//
+// cycle report:  My Heap Sort: 1000 x 2,780 ops/sec ±1.41% (87 runs sampled)
+// cycle report:  Eloquent JS Implementation Heap Sort x 6,556 ops/sec ±1.67% (85 runs sampled)
 // Fastest is Eloquent JS Implementation Heap Sort
 // ---End---
 //
-// cycle report:  My Heap Sort: 1000 x 970 ops/sec ±2.30% (85 runs sampled)
-// cycle report:  Eloquent JS Implementation Heap Sort x 6,783 ops/sec ±1.74% (87 runs sampled)
+// cycle report:  My Heap Sort: 10000 x 253 ops/sec ±1.48% (82 runs sampled)
+// cycle report:  Eloquent JS Implementation Heap Sort x 541 ops/sec ±1.56% (85 runs sampled)
 // Fastest is Eloquent JS Implementation Heap Sort
 // ---End---
 //
-// cycle report:  My Heap Sort: 10000 x 71.72 ops/sec ±3.41% (62 runs sampled)
-// cycle report:  Eloquent JS Implementation Heap Sort x 532 ops/sec ±1.43% (82 runs sampled)
-// Fastest is Eloquent JS Implementation Heap Sort
-// ---End---
-//
-// cycle report:  My Heap Sort: 100000 x 5.08 ops/sec ±3.08% (17 runs sampled)
-// cycle report:  Eloquent JS Implementation Heap Sort x 43.13 ops/sec ±2.20% (56 runs sampled)
+// cycle report:  My Heap Sort: 100000 x 17.44 ops/sec ±2.62% (46 runs sampled)
+// cycle report:  Eloquent JS Implementation Heap Sort x 43.01 ops/sec ±1.60% (55 runs sampled)
 // Fastest is Eloquent JS Implementation Heap Sort
 // ---End---

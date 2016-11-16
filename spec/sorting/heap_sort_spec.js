@@ -3,7 +3,7 @@ import Heap from '../../src/data_structures/heap'
 import EloquentHeap from '../../src/data_structures/implementations/eloquent_js_heap'
 
 
-fdescribe('heapsorts', function() {
+describe('heapsorts', function() {
   beforeEach(function() {
     spyOn(Heap.prototype, 'bubble_down').and.callThrough()
     spyOn(Heap.prototype, 'extract_root').and.callThrough()
@@ -17,6 +17,11 @@ fdescribe('heapsorts', function() {
       expect(heap_sort([
         7,6,5,4,3,2,1,8,9
       ])).toEqual([9,8,7,6,5,4,3,2,1])
+      // console.log(
+      //   '\nmy heap call statistics:',
+      //   '\nsink downs: ', Heap.prototype.bubble_down.calls.count(),
+      //   '\nextraction: ', Heap.prototype.extract_root.calls.count()
+      // )
     })
 
     it('should sort out 20 items in order', function() {
