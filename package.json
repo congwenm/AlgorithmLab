@@ -6,7 +6,12 @@
   "scripts": {
     "build": "npm run lint && webpack --config webpack.config.js -p",
     "dev": "npm run lint && webpack-dev-server --config webpack.dev.config.js --inline",
-    "lint": "./node_modules/.bin/eslint js"
+    "lint": "./node_modules/.bin/eslint js",
+    "test": "find app spec src | entr babel-node spec/run.js",
+    "amor:sort": "babel-node ./benchmarks/amortize/sort.js",
+    "amor:reverse": "babel-node ./benchmarks/amortize/sort_reverse_order.js",
+    "amor:ordered": "babel-node ./benchmarks/amortize/sort_ordered.js",
+    "amor": "babel-node ./amortization/index.js"
   },
   "author": "Yang Zhao",
   "license": "ISC",
@@ -23,17 +28,22 @@
     "extract-text-webpack-plugin": "^1.0.1",
     "file-loader": "^0.8.5",
     "font-awesome": "^4.5.0",
+    "jasmine": "^2.5.2",
     "jquery": "^2.2.2",
     "jquery.scrollto": "^2.1.2",
     "lodash": "^4.16.4",
     "microtime": "^2.1.1",
-    "node-sass": "^3.4.2",
+    "node-sass": "^3.10.1",
     "postcss-loader": "^0.10.1",
     "sass-loader": "^3.2.0",
     "style-loader": "^0.13.0",
+    "surgeonkit": "0.0.7",
     "url-loader": "^0.5.7",
     "waypoints": "^4.0.0",
     "webpack": "^1.12.14",
     "webpack-dev-server": "^1.14.1"
+  },
+  "dependencies": {
+    "d3": "^4.3.0"
   }
 }
