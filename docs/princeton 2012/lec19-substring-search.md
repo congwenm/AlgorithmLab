@@ -2,7 +2,102 @@
 * !? = not sure
 * 1,2 = 1 subscript 2
 
-# Knuth-Morris-Pratt
+
+
+
+# 2. Brute Force
+
+Check for pattern starting at each text position.
+
+```
+A   = match
+A`  = mismatch
+A`~ = dont need to match afterward b/c there's already an mismatch
+
+i j i+j 0 1 2 3 4 5 6 7 8 9 10
+------------------------------
+        A B A C A D A B R A C
+0 2  2  A B R`~
+1 0  1    A`~
+2 1  3      A B`~
+3 0  3        A`~
+4 1  5          A B`~
+5 0  5            A`~
+6 4 10              A B R A      <---- MATCH!!!
+\
+  return i when j is M, where M is the length of the match (here 'ABRA'.length)
+```
+
+## Implementation (Brute-force substring search)
+Check for pattern starting at each text position.
+
+```java
+public static int search(String pat, String txt) {
+  int M = pat.length();
+  int N = txt.length();
+  for (int i = 0; i < = N - M; i++) {
+    int j;
+    for (j = 0; j < M; j++)       // index for # of passing characters
+      if (txt.charAt(i+j) != pat.charAt(j))
+        break;
+    if (j == M) return i;         // `i` is index in text where pattern starts
+  }
+  return N;                       // NOT FOUND
+}
+```
+
+## Analysis
+- worst case: `~ M * N` char compares.
+- slow if text and pattern are repetitive, example:
+- Practical challenge, no room or time to save text. (judge wont like saving users search strings as oppose to just catch sensitive searches)
+
+  ```
+  pattern = A A A A B
+  i j i+j 0 1 2 3 4 5 6 7 8 9
+  ----------------------------
+          A A A A A A A A A B
+  0 2  2  A A A A B`
+  1 0  1    A A A A B`
+  2 1  3      A A A A B`
+  3 0  3        A A A A B`
+  4 1  5          A A A A B`
+  5 0  5            A A A A B    <-- MATCH!
+  ```
+
+### Problems
+bigger problem than its slow is we want to avoid **backup* in text stream.
+
+say we want to match **A A A A A B**, and we mismatch on **B**, we will need to backup to the second **A** to continue matching. 
+
+## Alternate implementation of brute force
+- **i** points to end of sequence of already-matched chars in text
+- **j** stores # of already-matched chars (end of sequence in pattern).
+
+```
+i j i+j 0 1 2 3 4 5 6 7 8 9 10
+------------------------------
+        A B A C A D A B R A C
+7 3  2          A D A C`
+5 0  1            A`~
+```
+
+```java
+public static int search(String pat, String txt) {
+  int i, N = txt.length();
+  int j, M = pat.length();
+  for (i = 0, j = 0; i < N && j < M; i++) {
+    if (txt.charAt(i) == pat.charAt(j)) j++; // matches, move to the next char
+    else { i -= j; j = 0; }                  // backup
+  }
+  if (j == M) return i - M;                  // found pattern
+  else        return N;
+}
+```
+
+
+
+
+# 3 Knuth-Morris-Pratt
 
 String: `abcabc`
 pattern `bcb`
@@ -176,7 +271,7 @@ ascii might be fine, but unicode but cost too much memory to devote to DFA repre
 Linear: KMP access `M + N` chars to search for a pattern of length `M` in a text of length `N`
 
 
-# Boyer - Moore
+# 4. Boyer - Moore
 cases:
 1. if `T` isnt even in pattern, increment `i` to one char beyond `T`, i.e. skip to the next char (resetting the pattern matching)
   v = `i`
@@ -275,7 +370,7 @@ public int search(String txt) {
 Performance is `~N/M`, worst case is brute-force, can be avoided by building a `Boyer Moore variant`, can improve worstcase to ~3N by adding KMP-like rule to guard against repetitive patterns.
 
 
-# Rabin-Karp
+# 5. Rabin-Karp
 
 use `%` modular operator on strings and substrings % large prime number to compute a hash, aka `Modular Hash Function`
 
