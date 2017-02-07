@@ -63,7 +63,7 @@ fdescribe(BST, () => {
     })
   })
 
-  fdescribe('#put_recursive', () => {
+  describe('#put_recursive', () => {
     beforeEach(() => {
       bst = new BST({ key: 5, value: 'start' })
       bst.put_recursive(bst, 4, 4) // Node, key, value
@@ -80,8 +80,19 @@ fdescribe(BST, () => {
     })
   })
 
+  fdescribe('put dependencies', () => {
+    beforeEach(() => {
+      bst = new BST({ key: 5, value: 'start' })
+      bst.put({ key: 4 })
+      bst.put({ key: 2 })
+      bst.put({ key: 3 })
+      bst.put({ key: 1 })
+    })
 
-  fdescribe('#iterate', () => {
-
+    fdescribe('#iterate', () => {
+      let coll = [];
+      bst.iterate(node => coll.push(node))
+      expect(coll.map(item => item.key)).toEqual([5,4,3,2,1])
+    })
   })
 })

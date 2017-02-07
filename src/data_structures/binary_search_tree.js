@@ -1,4 +1,5 @@
-// based on https://www.cs.princeton.edu/~rs/AlgsDS07/08BinarySearchTrees.pdf
+// based on
+// https://www.cs.princeton.edu/~rs/AlgsDS07/08BinarySearchTrees.pdf
 
 export class BSTNode {
   /**
