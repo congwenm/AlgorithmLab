@@ -56,8 +56,13 @@ export default class BinarySearchTree extends BSTNode{
     }
   }
 
-  put_recursive() {
+  put_recursive(xNode, key, value) {
     // challenge
+    if (xNode == null) { return new BSTNode({ key, value }) }
+    if (xNode.key == key) { xNode.value = value }
+    else if (xNode.key < key) { xNode.right = this.put_recursive(xNode.right, key, value) }
+    else                      { xNode.left = this.put_recursive(xNode.left, key, value) }
+    return xNode;
   }
 
   get_recursive() {

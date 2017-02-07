@@ -63,6 +63,24 @@ fdescribe(BST, () => {
     })
   })
 
+  fdescribe('#put_recursive', () => {
+    beforeEach(() => {
+      bst = new BST({ key: 5, value: 'start' })
+      bst.put_recursive(bst, 4, 4) // Node, key, value
+      bst.put_recursive(bst, 2, 2) // Node, key, value
+      bst.put_recursive(bst, 3, 3) // Node, key, value
+      bst.put_recursive(bst, 1, 1) // Node, key, value
+    })
+
+    it('should be able to find a match', () => {
+      expect(bst.left.value).toBe(4)
+      expect(bst.left.left.value).toBe(2)
+      expect(bst.left.left.right.value).toBe(3)
+      expect(bst.left.left.left.value).toBe(1)
+    })
+  })
+
+
   fdescribe('#iterate', () => {
 
   })
