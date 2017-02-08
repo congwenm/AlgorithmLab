@@ -1,7 +1,7 @@
 // based on
 // https://www.cs.princeton.edu/~rs/AlgsDS07/08BinarySearchTrees.pdf
 
-export class BSTNode {
+class BSTNode {
   /**
    * key - string
    * value - anything
@@ -85,7 +85,7 @@ export class BSTNode {
 
 
 // references the root node
-export default class BinarySearchTree extends BSTNode{
+class BinarySearchTree extends BSTNode{
   constructor(props) {
     // creates a node that references other nodes
     if (Array.isArray(props)) {
@@ -103,3 +103,5 @@ export default class BinarySearchTree extends BSTNode{
     }
   }
 }
+
+var bst = new BinarySearchTree([1,2,3]); //doesnt work?!

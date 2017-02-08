@@ -1,19 +1,8 @@
 import BST, { BSTNode } from '../../src/data_structures/binary_search_tree'
 
 fdescribe(BST, () => {
-  let bst
-  beforeEach(() => {
-    bst = new BST([1,2,3,4,5]);
-  })
-
-  it('should have symmetry in the exact order of', () => {
-    expect(bst.value).toBe(3);
-    expect(bst.left).toBe(2);
-    // expect(bst.left.left).toBe(1);
-    // expect(bst.right).toBe(1);
-  })
-
-  describe('constructor', () => {
+  var bst
+  fdescribe('constructor', () => {
     describe('single constructor', () => {
       it('should construct a single node', () => {
         bst = new BST({ key: 5 })
@@ -27,6 +16,24 @@ fdescribe(BST, () => {
         expect(bst.key).toBe(5)
         expect(bst.left.key).toBe(3)
         expect(bst.left.right.key).toBe(4)
+      })
+    })
+
+    describe('mass values', () => {
+      it('should construct a single root with multiple child', () => {
+        bst = new BST([3,2,1]) //doesnt work?!
+        expect(bst.value).toBe(3)
+        expect(bst.left.value).toBe(2)
+        expect(bst.left.left.value).toBe(1)
+      })
+    })
+
+    describe('smallest to largest', () => {
+      it('should construct a tree with only right children', () => {
+        bst = new BST([1,2,3])
+        expect(bst.value).toBe(1)
+        expect(bst.right.value).toBe(2)
+        expect(bst.right.right.value).toBe(3)
       })
     })
   })
@@ -45,7 +52,7 @@ fdescribe(BST, () => {
       expect(bst.get(2)).toBe('target 2')
     })
 
-    it('Node#get_recursive', () => {
+    it('BSTNode#get_recursive', () => {
       expect(bst.get_recursive(4)).toBe('target 4')
       expect(bst.get_recursive(3)).toBe('target 3')
       expect(bst.get_recursive(2)).toBe('target 2')
@@ -69,7 +76,7 @@ fdescribe(BST, () => {
     })
   })
 
-  describe('#put_recursive', () => {
+  describe('BSTNode#put_recursive', () => {
     beforeEach(() => {
       bst = new BST({ key: 5, value: 'start' })
       bst.put_recursive(bst, 4, 4) // Node, key, value
@@ -86,7 +93,7 @@ fdescribe(BST, () => {
     })
   })
 
-  xdescribe('put dependencies', () => {
+  describe('put dependencies', () => {
     beforeEach(() => {
       bst = new BST({ key: 5, value: 'start' })
       bst.put({ key: 4 })
