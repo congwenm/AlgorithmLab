@@ -96,7 +96,9 @@ class BinarySearchTree extends BSTNode{
         children = children.map(node => ({ key: node }))
       }
       super(root)
-      children.forEach(node => this.put(node))
+      children.forEach(node =>
+        this.put(node)
+      )
     }
     else {
       super(props)

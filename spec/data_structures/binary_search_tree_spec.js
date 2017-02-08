@@ -2,7 +2,7 @@ import BST, { BSTNode } from '../../src/data_structures/binary_search_tree'
 
 fdescribe(BST, () => {
   var bst
-  fdescribe('constructor', () => {
+  describe('constructor', () => {
     describe('single constructor', () => {
       it('should construct a single node', () => {
         bst = new BST({ key: 5 })

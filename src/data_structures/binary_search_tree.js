@@ -47,8 +47,8 @@ export class BSTNode {
         }
       }
       else /* key > xNode.key */ { // add node on right or go to the right node and continue
-        if (this.right) {
-          xNode = this.right
+        if (xNode.right) {
+          xNode = xNode.right
         }
         else {
           xNode.right = new BSTNode(params); return xNode.right;
