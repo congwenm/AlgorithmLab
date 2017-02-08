@@ -14,21 +14,21 @@ export class BSTNode {
     if (left) this.left = left
     if (right) this.right = right
   }
-}
 
+  put_recursive(xNode, key, value) {
+    // challenge
+    if (xNode == null)        { return new BSTNode({ key, value }) }
+    if (xNode.key == key)     { xNode.value = value }
+    else if (xNode.key < key) { xNode.right = this.put_recursive(xNode.right, key, value) }
+    else                      { xNode.left = this.put_recursive(xNode.left, key, value) }
+    return xNode;
+  }
 
-// references the root node
-export default class BinarySearchTree extends BSTNode{
-  constructor(props) {
-    // creates a node that references other nodes
-    if (Array.isArray(props)) {
-      var [ root, ...children ] = props
-      super(root)
-      children.forEach(node => this.put(node))
-    }
-    else {
-      super(props)
-    }
+  get_recursive(key) {
+    // challenge
+    if (key == this.key) { return this.value }
+    else if (key > this.key) { return this.right ? this.right.get_recursive(key) : null }
+    else { return this.left ? this.left.get_recursive(key) : null }
   }
 
   put(params) {
@@ -57,19 +57,6 @@ export default class BinarySearchTree extends BSTNode{
     }
   }
 
-  put_recursive(xNode, key, value) {
-    // challenge
-    if (xNode == null) { return new BSTNode({ key, value }) }
-    if (xNode.key == key) { xNode.value = value }
-    else if (xNode.key < key) { xNode.right = this.put_recursive(xNode.right, key, value) }
-    else                      { xNode.left = this.put_recursive(xNode.left, key, value) }
-    return xNode;
-  }
-
-  get_recursive() {
-    // challenge
-  }
-
   get(key) {
     let x = this
     while(x.key !== null) {
@@ -78,5 +65,25 @@ export default class BinarySearchTree extends BSTNode{
       else /* x.key > key */  { x = x.left }
     }
     return null;
+  }
+
+  iterate(callback) {
+
+  }
+}
+
+
+// references the root node
+export default class BinarySearchTree extends BSTNode{
+  constructor(props) {
+    // creates a node that references other nodes
+    if (Array.isArray(props)) {
+      var [ root, ...children ] = props
+      super(root)
+      children.forEach(node => this.put(node))
+    }
+    else {
+      super(props)
+    }
   }
 }

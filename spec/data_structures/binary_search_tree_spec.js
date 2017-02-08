@@ -13,7 +13,7 @@ fdescribe(BST, () => {
     // expect(bst.right).toBe(1);
   })
 
-  fdescribe('constructor', () => {
+  describe('constructor', () => {
     describe('single constructor', () => {
       it('should construct a single node', () => {
         bst = new BST({ key: 5 })
@@ -43,6 +43,12 @@ fdescribe(BST, () => {
       expect(bst.get(4)).toBe('target 4')
       expect(bst.get(3)).toBe('target 3')
       expect(bst.get(2)).toBe('target 2')
+    })
+
+    it('Node#get_recursive', () => {
+      expect(bst.get_recursive(4)).toBe('target 4')
+      expect(bst.get_recursive(3)).toBe('target 3')
+      expect(bst.get_recursive(2)).toBe('target 2')
     })
   })
 
@@ -80,7 +86,7 @@ fdescribe(BST, () => {
     })
   })
 
-  fdescribe('put dependencies', () => {
+  xdescribe('put dependencies', () => {
     beforeEach(() => {
       bst = new BST({ key: 5, value: 'start' })
       bst.put({ key: 4 })
@@ -89,10 +95,12 @@ fdescribe(BST, () => {
       bst.put({ key: 1 })
     })
 
-    fdescribe('#iterate', () => {
-      let coll = [];
-      bst.iterate(node => coll.push(node))
-      expect(coll.map(item => item.key)).toEqual([5,4,3,2,1])
+    describe('#iterate', () => {
+      it('should iterate through all the nodes', () => {
+        let coll = []
+        bst.iterate(node => coll.push(node))
+        expect(coll.map(item => item.key)).toEqual([5,4,3,2,1])
+      })
     })
   })
 })
