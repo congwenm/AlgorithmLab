@@ -1,6 +1,6 @@
 import BST, { BSTNode } from '../../src/data_structures/binary_search_tree'
 
-fdescribe(BST, () => {
+describe(BST, () => {
   var bst
   describe('constructor', () => {
     describe('single constructor', () => {
