@@ -1,0 +1,27 @@
+{
+  "name": "app",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "game": "rollup --watch -i ../ttt.js -o ./ttt_compiled.js -f cjs",
+    "start": "nodemon app.js",
+    "debug": "nodemon debug app.js",
+    "lr": "find . -maxdepth 1 | entr livereload 2"
+  },
+  "keywords": [],
+  "author": "Congwen Ma <congwen.ma@gmail.com>",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.16.1",
+    "bootstrap": "^3.3.1",
+    "express": "^4.14.1",
+    "pug": "^2.0.0-beta11"
+  },
+  "devDependencies": {
+    "nodemon": "^1.11.0",
+    "rollup": "^0.41.4",
+    "rollup-watch": "^3.2.2"
+  }
+}

@@ -1,0 +1,71 @@
+html
+  head
+    title Express HTML
+    script(src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js')
+    link(rel='stylesheet', href='node_modules/bootstrap/dist/css/bootstrap.css')
+    link(rel='stylesheet', href='node_modules/bootstrap/dist/css/bootstrap-theme.min.css')
+    script(src='node_modules/bootstrap/dist/js/bootstrap.js')
+
+    style(type='text/css').
+      table, th, td {
+        border: 1px solid black;
+      }
+      td a, td div{
+        display: inline-block;
+        padding: 20px;
+      }
+
+  body
+    div(style='margin: 0 100px;')
+      nav.navbar.navbar-inverse.navbar-static-top
+      .jumbotron(style='padding:40px;')
+        a.btn.btn-primary(href="/reset") Reset
+        if game.winner
+          p= `${game.winner} has won!`
+        else if game.winner === "NO ONE"
+          p= `Tied`
+        else
+          p= `${game.currentPlayer}'s turn`
+        table
+          -
+          each row, rowIndex in game.board.getRows()
+            tr
+              -
+              each block, colIndex in row
+                td
+                  if block == null && !game.hasEnded
+                    form(onClick="this.submit()" action="/move" method="POST")
+                      input(type="hidden" value=colIndex name="x")
+                      input(type="hidden" value=rowIndex name="y")
+                      div _
+                  else
+                    div #{block}
+
+  script.
+    const ajax = function(method, url, params) {
+      const xhttp = new XMLHttpRequest()
+
+      xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+          console.log('done')
+        }
+      }
+      xhttp.open(method, url, true)
+      xhttp.setRequestHeader("Content-Type", "application/json")
+      xhttp.send(JSON.stringify(params))
+    };
+
+    var sendMove = function([x, y]) {
+      //- debugger
+      ajax('POST', '/move', { x, y })
+    }
+
+    function playerMove(x, y) {
+      sendMove([x, y])
+    }
+
+    function reset(x, y) {
+      ajax('POST', '/reset');
+    }
+
+    //- document.querySelector('td').click()
