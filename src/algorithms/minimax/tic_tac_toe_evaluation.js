@@ -11,23 +11,45 @@
 // const WINNING_CONDITION = [0, 1, 2].map(row =>
 //   [0, 1, 2].map(col => )
 // )
+const xCanWin = triples => triples.every(p => p === 'x' || p == null)
+const oCanWin = triples => triples.every(p => p === 'o' || p == null)
+
+const aggregateOdds = (odds, triples) => {
+  xCanWin(triples) && odds++
+  oCanWin(triples) && odds--
+  return odds
+}
+
+export const getRows = board => {
+  var arr = Object.keys([...Array(board[0].length)]) // construct array of length = num of rows
+    .map(i => [])
+
+  board.forEach(xCol => {
+    xCol.forEach(
+      (coord, y) => arr[y].push(coord)
+    )
+  })
+
+  return arr
+}
+
+export const xWinningOdds = rows =>
+  rows.reduce( aggregateOdds, 0)
+
+
 export default (board) => {
   if (!isValid(board)) {
     throw new Error('Cannot evaluate false board construction')
   }
 
-  var winByCol = board.map((xCol, x) =>
-    xCol.every(
-      (coord, y) => coord === 'x' || coord == null
-    )
-  )
-  var winByRow = board.map((xCol, x) =>
-    1
-  )
-  var winByDiagonal
+  var colWinOdds = xWinningOdds(board)
+  var rowWinOdds = xWinningOdds(getRows(board))
+  var winByDiagonal = xWinningOdds([
+    [board[0][0], board[1][1], board[2][2]],
+    [board[2][0], board[1][1], board[0][2]]
+  ])
 
-  var winningCombination = [...winByCol, ...winByRow, ...winByDiagonal]
-  // measure
+  return colWinOdds + rowWinOdds + winByDiagonal
 }
 
 function isValid(board) {
