@@ -1,6 +1,6 @@
 import TTC from '../../../src/algorithms/minimax/tic_tac_toe'
 
-fdescribe(TTC, () => {
+describe(TTC, () => {
   let ttc
   beforeEach(() => {
     ttc = new TTC
