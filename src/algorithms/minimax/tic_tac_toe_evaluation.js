@@ -11,7 +11,7 @@
 // const WINNING_CONDITION = [0, 1, 2].map(row =>
 //   [0, 1, 2].map(col => )
 // )
-import { Matrix } from './tic_tac_toe'
+import Matrix from './matrix'
 
 const xCanWin = triples => triples.every(p => p === 'x' || p == null)
 const oCanWin = triples => triples.every(p => p === 'o' || p == null)

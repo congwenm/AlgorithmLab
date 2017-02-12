@@ -1,57 +1,11 @@
 import TTCEval from './tic_tac_toe_evaluation'
+import Matrix from './matrix'
 
-const expand = (num) => Object.keys([...new Array(num)])
+const filterExist = x => x
 
-
-const hasSameLength = (result, subArr) => {
-  if (result === undefined) {
-    result = subArr.length
-  }
-
+const hasSameLength = (result, { length }) => {
+  result = typeof result === 'number' ? result : length
   return result
-}
-
-export class Matrix extends Array {
-  constructor({ width, height }) {
-    super(...expand(width).map(colX => {
-      return expand(height).map(coord => null) // which is a column
-    }))
-  }
-
-  static from($2dArray) {
-    const [width, height] = [$2dArray.length, $2dArray[0].length]
-    const inst = new this({ width, height })
-
-    $2dArray.forEach((xCol, x) =>
-      // inserting values into the inst
-      xCol.forEach((coord, y) => inst[x][y] = coord)
-    )
-    return inst
-  }
-
-  toString() {
-    return [
-      '',
-      ...this.getRows().map(
-        yRow => yRow.map(coord => coord || '_').join(' ')
-      ),
-      ''
-    ].join('\n')
-  }
-
-  getRows () {
-    var arr = Object.keys([...Array(this[0].length)]) // construct array of length = num of rows
-      .map(i => [])
-
-    this.forEach(xCol => {
-      xCol.forEach(
-        (coord, y) => arr[y].push(coord)
-      )
-    })
-
-    return arr
-  }
-
 }
 
 export default class TicTacToe {
@@ -66,10 +20,53 @@ export default class TicTacToe {
   }
 
   playerMove(x, y) {
-    if(this[x][y] != null) { throw new Error("Cannot move on existing piece")}
-    this[x][y] = 'x';
+    if(this.board[x][y] != null) { throw new Error("Cannot move on existing piece")}
+    this.board[x][y] = 'x'
+    this.checkForVictory()
   }
 
+  checkForVictory() {
+    this.board
+  }
+
+  computerMove(x, y) {
+    if(this.board[x][y] != null) { throw new Error("Cannot move on existing piece")}
+    this.board[x][y] = 'o'
+    this.checkForVictory()
+  }
+
+  // NOTE: does the minimaxing logic here.
+  computerRespond() {
+    let moveOptions = this.moveOptions
+
+    // weighs the remaining options
+    moveOptions = moveOptions.map(
+      move => {
+        let weight
+        const [x, y] = move
+        this.computerMove(x, y)
+        weight = TTCEval(this.board)
+        this.board[x][y] = null
+        return { weight, move }
+      })
+
+    // pick best option
+    var bestOption = moveOptions.reduce((max, move) => {
+      return max.weight < move.weight ?  move : max
+    }, moveOptions[0])
+
+    // make the move
+    this.computerMove(...bestOption.move)
+  }
+
+  get moveOptions() {
+    debugger
+    return [].concat(
+      ...this.board.map((xCol, x) => {
+        return xCol.map((coord, y) => !coord && [x, y]).filter(filterExist)
+      })
+    )
+  }
 
   toString() {
     this.board.toString();
