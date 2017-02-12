@@ -1,6 +1,6 @@
 import TTTEval, { xWinningOdds, getRows } from '../../../src/algorithms/minimax/tic_tac_toe_evaluation'
 
-fdescribe(TTTEval, () => {
+describe(TTTEval, () => {
   it('should validate isValid', () => {
     expect(() => TTTEval([1,])).toThrow()
     expect(() => TTTEval([[], [], []])).toThrow()
@@ -61,7 +61,7 @@ fdescribe(TTTEval, () => {
       })
     })
 
-    fit('should calculate score of `x`', () => {
+    it('should calculate score of `x`', () => {
       expect(TTTEval(board)).toBe(4)
 
       board[2][1] = 'o'

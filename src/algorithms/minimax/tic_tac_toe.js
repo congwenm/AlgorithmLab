@@ -19,15 +19,13 @@ export class Matrix extends Array {
   }
 
   static from($2dArray) {
-    const width = $2dArray.length
-    const height = $2dArray[0].length
+    const [width, height] = [$2dArray.length, $2dArray[0].length]
     const inst = new this({ width, height })
 
-    $2dArray.forEach((xCol, x) => {
-      xCol.forEach(
-        (coord, y) => inst[x][y] = coord // inserting values into the inst
-      )
-    })
+    $2dArray.forEach((xCol, x) =>
+      // inserting values into the inst
+      xCol.forEach((coord, y) => inst[x][y] = coord)
+    )
     return inst
   }
 
@@ -66,6 +64,12 @@ export default class TicTacToe {
     // console.log(this.board)
     console.log(this.board.toString())
   }
+
+  playerMove(x, y) {
+    if(this[x][y] != null) { throw new Error("Cannot move on existing piece")}
+    this[x][y] = 'x';
+  }
+
 
   toString() {
     this.board.toString();

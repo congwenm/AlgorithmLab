@@ -11,4 +11,12 @@ fdescribe(TTC, () => {
       ttc.view()
     })
   })
+
+  describe('progression', () => {
+    it('should evaluate a continuous game', () => {
+
+
+      ttc.playerMove(1, 1)
+    })
+  })
 })
