@@ -11,6 +11,8 @@
 // const WINNING_CONDITION = [0, 1, 2].map(row =>
 //   [0, 1, 2].map(col => )
 // )
+import { Matrix } from './tic_tac_toe'
+
 const xCanWin = triples => triples.every(p => p === 'x' || p == null)
 const oCanWin = triples => triples.every(p => p === 'o' || p == null)
 
@@ -20,30 +22,21 @@ const aggregateOdds = (odds, triples) => {
   return odds
 }
 
-export const getRows = board => {
-  var arr = Object.keys([...Array(board[0].length)]) // construct array of length = num of rows
-    .map(i => [])
-
-  board.forEach(xCol => {
-    xCol.forEach(
-      (coord, y) => arr[y].push(coord)
-    )
-  })
-
-  return arr
-}
+// export
 
 export const xWinningOdds = rows =>
   rows.reduce( aggregateOdds, 0)
 
 
 export default (board) => {
-  if (!isValid(board)) {
-    throw new Error('Cannot evaluate false board construction')
+  if (!isValid(board)) { throw new Error('Cannot evaluate false board construction') }
+
+  if (!(board instanceof Matrix)) {
+    board = Matrix.from(board)
   }
 
   var colWinOdds = xWinningOdds(board)
-  var rowWinOdds = xWinningOdds(getRows(board))
+  var rowWinOdds = xWinningOdds(board.getRows())
   var winByDiagonal = xWinningOdds([
     [board[0][0], board[1][1], board[2][2]],
     [board[2][0], board[1][1], board[0][2]]
