@@ -106,7 +106,13 @@ fdescribe(BST, () => {
       it('should iterate through all the nodes', () => {
         let coll = []
         bst.iterate(node => coll.push(node))
-        expect(coll.map(item => item.key)).toEqual([5,4,3,2,1])
+        expect(coll.map(item => item.key)).toEqual([1,2,3,4,5])
+      })
+
+      it('should iterate IN ORDER', () => {
+        let coll = []
+        new BST([10, 9, 8, 7, 6, 5, 4, 3, 2, 1]).iterate(node => coll.push(node))
+        expect(coll.map(item => item.key)).toEqual([1,2,3,4,5,6,7,8,9,10])
       })
     })
   })

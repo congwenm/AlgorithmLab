@@ -31,6 +31,14 @@ export class BSTNode {
     else { return this.left ? this.left.get_recursive(key) : null }
   }
 
+  // Inorder traversal
+  iterate(callback) {
+    this.left && this.left.iterate(callback)
+    callback(this)
+    this.right && this.right.iterate(callback)
+  }
+
+
   put(params) {
     const { key, value } = params;
     let xNode = this// node
@@ -65,10 +73,6 @@ export class BSTNode {
       else /* x.key > key */  { x = x.left }
     }
     return null;
-  }
-
-  iterate(callback) {
-
   }
 
   delete_first_approach() {
