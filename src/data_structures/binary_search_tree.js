@@ -38,6 +38,12 @@ export class BSTNode {
     this.right && this.right.iterate(callback)
   }
 
+  // Inorder collection
+  get all() {
+    let coll = []
+    this.iterate(n => coll.push(n))
+    return coll
+  }
 
   put(params) {
     const { key, value } = params;
@@ -81,9 +87,24 @@ export class BSTNode {
     // 2 children, find largest of the two using right-left swap with next largest, remove
   }
 
-  delete_randomized() { // extremely complicated
+  delete_randomized(node) { // extremely complicated
     // - remove node
     // - join remaining subtress and make a tree
+
+    // private Node remove(Node x, Key key)
+    // {
+    //  if (x == null)
+    //  return new Node(key, val);
+    //  int cmp = key.compareTo(x.key);
+    //  if (cmp == 0)
+    //  return join(x.left, x.right);
+    //  else if (cmp < 0)
+    //  x.left = remove(x.left, key);
+    //  else if (cmp > 0)
+    //  x.right = remove(x.right, key);
+    //  return x;
+    // }
+
   }
 }
 
