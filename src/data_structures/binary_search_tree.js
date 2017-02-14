@@ -87,7 +87,7 @@ export class BSTNode {
     // 2 children, find largest of the two using right-left swap with next largest, remove
   }
 
-  delete_randomized(node) { // extremely complicated
+  delete_randomized(node, key) { // extremely complicated
     // - remove node
     // - join remaining subtress and make a tree
 
@@ -104,7 +104,31 @@ export class BSTNode {
     //  x.right = remove(x.right, key);
     //  return x;
     // }
+    if (node == undefined) return new BSTNode({key, value})
 
+    if (this.key === node.key) {
+      // join(node.left, node.right)
+      // node with only one child or no child
+      if (node.left == NULL) {
+        return node.right
+      }
+      else if (node.right == NULL) {
+        return node.left
+      }
+
+      // node with two children: get the inorder successor (smallest in the right subtree)
+      smallest = node.right.smallest
+      Object.assign(this, smallest)
+    }
+    else if (this.key < node.key) {
+      node.left = this.remove(node.left, this.key)
+    }
+
+    // if the key to be deleted is greater than the root's key
+    else if (this.key > node.key) {
+      node.right = this.remove(node.right, this.key)
+    }
+    return node
   }
 }
 
