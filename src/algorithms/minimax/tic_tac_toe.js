@@ -17,6 +17,18 @@ class Benchmarker {
   get result() { `Algorithm of #mmSearch took ${this.diff[0]}.${this.diff[1]}`}
 }
 
+// use as [1,2,3,2].reduce(uniq, [])
+const uniq = (set, next) => (!set.includes(next) && set.push(next), set)
+
+const hasWinner = triples => {
+  var unique = triples.reduce(uniq, [])
+  if (unique.length === 1) {
+    if (unique[0] === 'x') return 'x'
+    if (unique[0] === 'o') return 'o'
+    return null
+  }
+}
+
 export default class TicTacToe {
   constructor() {
     this.board = new Matrix({ width: 3, height: 3 })
@@ -35,7 +47,15 @@ export default class TicTacToe {
   }
 
   checkForVictory() {
-    this.board
+    const { board } = this
+    var colWins = board.map(hasWinner)
+    var rowWins = board.getRows().map(hasWinner)
+    var diagWins = [
+      [board[0][0], board[1][1], board[2][2]],
+      [board[2][0], board[1][1], board[0][2]]
+    ].map(hasWinner)
+    // console.log("CHECKFORVICTORY", colWins, rowWins, diagWins)
+    return [...colWins, ...rowWins, ...diagWins].filter(x => x)[0] || null
   }
 
   computerMove([x, y]) {
@@ -87,7 +107,8 @@ export default class TicTacToe {
 
     // time the algorithm
     benchmarker.end()
-
+    console.log(`ALL SCORES: \n ${moveOptions.map(m => `${m}${m.value}`).join('\n')}`)
+    console.log(`BEST MOVE IS: ${bestMove}`)
     // make the move
     callback(bestMove)
   }
@@ -126,6 +147,7 @@ export default class TicTacToe {
       // cut-off, no need to go down further, there's no answer here
       if (beta <= alpha) return true;
     })
+    console.log("EVALUATED VALUE OF " + (isMax ? alpha : beta))
     return isMax ? alpha : beta
   }
 
