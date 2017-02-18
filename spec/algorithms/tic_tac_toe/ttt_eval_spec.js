@@ -1,21 +1,14 @@
-import TTTEval, { xWinningOdds, getRows } from '../../../src/algorithms/minimax/tic_tac_toe_evaluation'
+import TTTEval, { xWinningOdds } from '../../../src/algorithms/tic_tac_toe/ttt_eval'
+import Matrix from '../../../src/algorithms/tic_tac_toe/matrix'
 
-describe(TTTEval, () => {
+fdescribe(TTTEval, () => {
   it('should validate isValid', () => {
-    expect(() => TTTEval([1,])).toThrow()
+    expect(() => TTTEval(['x',])).toThrow()
     expect(() => TTTEval([[], [], []])).toThrow()
+    expect(() => TTTEval([ [,,,], [,,,], [,,1] ])).toThrow()
 
-    expect(() => TTTEval([
-      [,,,], [,,,], [,,1]
-    ])).toThrow()
-
-    expect(() => TTTEval([
-      [,,,], [,,,], [,,,]
-    ])).not.toThrow()
-
-    expect(() => TTTEval([
-      [,,,], [,,,], [,,'x']
-    ])).not.toThrow()
+    expect(() => TTTEval([ [,,,], [,,,], [,,,] ])).not.toThrow()
+    expect(() => TTTEval([ [,,,], [,,,], [,,'x'] ])).not.toThrow()
   })
 
   describe('should score player `x`', () => {
@@ -41,19 +34,19 @@ describe(TTTEval, () => {
 
     describe('helper getRows()', () => {
       it('should return yRows intead of xCols', () => {
-        expect(getRows([
+        expect(Matrix.from([
           [1, 2], // col 1
           [3, 4]  // col 2
-        ])).toEqual([
+        ]).getRows()).toEqual([
           [1, 3],
           [2, 4]
         ])
 
-        expect(getRows([
+        expect(Matrix.from([
           [1, 2, 3],
           [4, 5, 6],
           [7, 8, 9]
-        ])).toEqual([
+        ]).getRows()).toEqual([
           [1, 4, 7],
           [2, 5, 8],
           [3, 6, 9]

@@ -1,4 +1,4 @@
-import TTCEval from './tic_tac_toe_evaluation'
+import TTTEval from './ttt_eval'
 import Matrix from './matrix'
 
 const filterExist = x => x
@@ -81,10 +81,10 @@ export default class TicTacToe {
     )
   }
 
-  mmSearch(ttcGame, callback) {
+  mmSearch(tttGame, callback) {
     const benchmarker = new Benchmarker
     // get all moves
-    let moveOptions = ttcGame.moveOptions // ({ max: true })
+    let moveOptions = tttGame.moveOptions // ({ max: true })
 
     let bestMove = null
 
@@ -92,7 +92,7 @@ export default class TicTacToe {
     moveOptions.forEach(
       move => {
         // make a move
-        ttcGame.computerMove(move)
+        tttGame.computerMove(move)
 
         // evaluate and assign to move, determine whether or not to do statical evaluation
         move.value = this.alphaBeta(9, -Infinity, Infinity, { isMax: false })
@@ -116,7 +116,7 @@ export default class TicTacToe {
   alphaBeta (depth, alpha, beta, { isMax }) {
     // return evaluation if reaching leaf nod eor any side won
     if (depth == 0 || this.checkForVictory() !== null) {
-      return TTCEval(this.board)
+      return TTTEval(this.board)
     }
     var moveOptions = this.moveOptions(isMax)
 

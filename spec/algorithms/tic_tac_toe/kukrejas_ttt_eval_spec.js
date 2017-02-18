@@ -1,11 +1,11 @@
-import TTC, { evaluatePosition } from '../../../src/algorithms/minimax/kukrejas_ttt'
+import TTT, { evaluatePosition } from '../../../src/algorithms/tic_tac_toe/kukrejas_ttt_eval'
 
 const getter = value => value
 
 describe("#evaluatePosition", () => {
   let board = [
     null, null, null,
-    null, 'X',    null,
+    null,  'X', null,
     null, null, null
   ]
 
