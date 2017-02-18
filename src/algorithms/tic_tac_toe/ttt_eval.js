@@ -7,42 +7,70 @@
 // should be something like board = [[,,][,,'X'],[,,'O']]
 
 
-// determines the score by the number of winning combinations you(X) have left!
-// const WINNING_CONDITION = [0, 1, 2].map(row =>
-//   [0, 1, 2].map(col => )
-// )
-import Matrix from './matrix'
 
-const xCanWin = triples => triples.every(p => p === 'X' || p == null)
-const oCanWin = triples => triples.every(p => p === 'O' || p == null)
-
-const aggregateOdds = (odds, triples) => {
-  xCanWin(triples) && odds++
-  oCanWin(triples) && odds--
-  return odds
+const scoreTriples = (playerPiece) => {
+  var opponentPiece = playerPiece === 'X' ? 'O' : 'X';
+  return triples => {
+    var friendlies = triples.filter( coord => coord === playerPiece ).length
+    var foes = triples.filter( coord => coord === opponentPiece ).length
+    if (friendlies === 0 && foes === 0) {
+      return 0
+    }
+    if (friendlies === 0) {
+      return -(Math.pow(10, foes))
+    }
+    else if (foes === 0) {
+      return Math.pow(10, friendlies)
+    }
+    else {
+      return 0
+    }
+  }
 }
 
-// export
 
-export const xWinningOdds = rows =>
-  rows.reduce( aggregateOdds, 0)
+import Matrix from './matrix'
 
-
-export default (board) => {
+// @params player - 'X' or 'O'
+const evaluateBoard = (board, player) => {
   if (!isValid(board)) { throw new Error('Cannot evaluate false board construction') }
 
   if (!(board instanceof Matrix)) {
     board = Matrix.from(board)
   }
 
-  var colWinOdds = xWinningOdds(board)
-  var rowWinOdds = xWinningOdds(board.getRows())
-  var winByDiagonal = xWinningOdds([
+  var colWinScore = board.map(scoreTriples(player))
+    .reduce((sum, val) => sum + val, 0);
+
+  var rowWinScore = board.getRows().map(scoreTriples(player))
+    .reduce((sum, val) => sum + val, 0);
+
+  var diagWinScore = ([
     [board[0][0], board[1][1], board[2][2]],
     [board[2][0], board[1][1], board[0][2]]
-  ])
+  ]).map(scoreTriples(player))
+    .reduce((sum, val) => sum + val, 0);
 
-  return colWinOdds + rowWinOdds + winByDiagonal
+  // console.log('evaluation: ', colWinScore, rowWinScore, diagWinScore)
+  return colWinScore + rowWinScore + diagWinScore
+}
+
+export default evaluateBoard
+
+export const evaluatePlay = (board, player) => {
+  var best = { position: null, score: -Infinity }
+  board.vacant.forEach(({ coord, position, position: [x, y] }) => {
+    // debugger
+    board[x][y] = player
+    var score = evaluateBoard(board, player)
+    // console.log(`Position ${position} yield a score of ${score}`)
+    if(score > best.score) {
+      best = { position, score }
+    }
+    board[x][y] = null
+  })
+  debugger;
+  return best;
 }
 
 function isValid(board) {

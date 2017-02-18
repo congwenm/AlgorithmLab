@@ -42,6 +42,17 @@ export default class Matrix extends Array {
   }
 
   get all() {
-    return this.reduce((a, b) => a.concat(b))
+    return this.reduce((coll, xCol, x) =>
+      coll.concat(
+        xCol.map((coord, y) => (
+          { coord, position: [x, y] }
+        ))
+      ),
+      []
+    )
+  }
+
+  get vacant() {
+    return this.all.filter(({ coord }) => coord == null)
   }
 }
