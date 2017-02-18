@@ -1,43 +1,57 @@
-import TTT, { evaluatePosition } from '../../../src/algorithms/tic_tac_toe/kukrejas_ttt_eval'
+import TTT, { evaluateBoard, evaluatePlay } from '../../../src/algorithms/tic_tac_toe/kukrejas_ttt_eval'
 
 const getter = value => value
 
-describe("#evaluatePosition", () => {
-  let board = [
-    null, null, null,
-    null,  'X', null,
-    null, null, null
-  ]
+describe("#evaluateBoard", () => {
+  let board
 
-  it('should return 4 for the center piece', () => {
+  beforeEach(() => {
+    board = [
+      null, null, null,
+      null, null, null,
+      null, null, null
+    ]
+  })
 
-    var xScore = evaluatePosition(board, 'X')
+  it('should return center as the best position', () => {
+    evaluateBoard(board, 'X')
+    console.log(`best play for player "O" is ${evaluatePlay(board, 'O').position}`)
+    expect(evaluatePlay(board, 'O').position).toBe(4)
+  })
+
+  it('should return correct ranking of all options', () => {
+    board[4] = 'X';
+    var xScore = evaluateBoard(board, 'X')
     console.log(`XSCORE: ${xScore}`)
 
-    var oScore = evaluatePosition(board, 'O')
+    var oScore = evaluateBoard(board, 'O')
     console.log(`OSCORE: ${oScore}`);
 
-    // try all other
-
+    // try all other options
     console.log('\n', 'Evaluation:')
-    board.map((v,k) => v === null && k).filter(getter).map(num => {
-      board[num] = 'O'
-      oScore = evaluatePosition(board, 'O')
-      console.log(`Position ${num} yield a score of ${oScore}`)
-
-      board[num] = null
-    })
+    console.log(`best play for player "O" is ${evaluatePlay(board, 'O').position}`)
 
     board[5] = 'O'
     board[2] = 'X';
 
     console.log('\n', 'Evaluation:')
-    board.map((v,k) => v === null && k).filter(getter).map(num => {
-      board[num] = 'O'
-      oScore = evaluatePosition(board, 'O')
-      console.log(`Position ${num} yield a score of ${oScore}`)
+    evaluatePlay(board, 'O')
+  })
 
-      board[num] = null
-    })
+  it('self-preservation', () => {
+    board[4] = 'X'
+    board[5] = 'O'
+    board[2] = 'X'
+
+    // O should play board[6]
+    expect(evaluatePlay(board, 'O').position).toBe(6)
+  })
+
+  it('knows how to win', () => {
+    board[5] = 'O'
+    board[8] = 'O'
+
+    // O should play board[6]
+    expect(evaluatePlay(board, 'O').position).toBe(2)
   })
 })

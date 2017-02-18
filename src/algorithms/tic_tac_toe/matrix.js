@@ -41,4 +41,7 @@ export default class Matrix extends Array {
     return arr
   }
 
+  get all() {
+    return this.reduce((a, b) => a.concat(b))
+  }
 }

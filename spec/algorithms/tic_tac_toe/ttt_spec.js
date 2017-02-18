@@ -32,31 +32,31 @@ describe(TTT, () => {
 
   describe('#checkForVictory', () => {
     it('returns `x` if row match', () => {
-      ttt.board[0][1] = 'x'
-      ttt.board[1][1] = 'x'
-      ttt.board[2][1] = 'x'
-      expect(ttt.checkForVictory()).toBe('x')
+      ttt.board[0][1] = 'X'
+      ttt.board[1][1] = 'X'
+      ttt.board[2][1] = 'X'
+      expect(ttt.checkForVictory()).toBe('X')
     })
 
     it('returns `x` if col match', () => {
-      ttt.board[0][0] = 'x'
-      ttt.board[0][1] = 'x'
-      ttt.board[0][2] = 'x'
-      expect(ttt.checkForVictory()).toBe('x')
+      ttt.board[0][0] = 'X'
+      ttt.board[0][1] = 'X'
+      ttt.board[0][2] = 'X'
+      expect(ttt.checkForVictory()).toBe('X')
     })
 
     it('returns `x` if dia match', () => {
-      ttt.board[0][0] = 'x'
-      ttt.board[1][1] = 'x'
-      ttt.board[2][2] = 'x'
-      expect(ttt.checkForVictory()).toBe('x')
+      ttt.board[0][0] = 'X'
+      ttt.board[1][1] = 'X'
+      ttt.board[2][2] = 'X'
+      expect(ttt.checkForVictory()).toBe('X')
     })
 
     it('returns `o` if other player match', () => {
-      ttt.board[0][1] = 'o'
-      ttt.board[1][1] = 'o'
-      ttt.board[2][1] = 'o'
-      expect(ttt.checkForVictory()).toBe('o')
+      ttt.board[0][1] = 'O'
+      ttt.board[1][1] = 'O'
+      ttt.board[2][1] = 'O'
+      expect(ttt.checkForVictory()).toBe('O')
     })
 
     it('returns `null` if neither match', () => {

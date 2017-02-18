@@ -1,3 +1,5 @@
+const getter = value => value
+
 const Three_in_a_Row = [
   [ 0, 1, 2 ],
   [ 3, 4, 5 ],
@@ -19,7 +21,7 @@ const Heuristic_Array = [
 
 // @param board - chars<Array>
 // @param player - 'O' or 'X'
-export const evaluatePosition = (board, player) => {
+export const evaluateBoard = (board, player) => {
   var opponent = player === 'X' ? 'O' : 'X'
   var piece
   var players
@@ -40,4 +42,19 @@ export const evaluatePosition = (board, player) => {
   }
 
   return result
+}
+
+
+export const evaluatePlay = (board, player) => {
+  var best = { score: -Infinity, position: null }
+  board.map((v,k) => v === null && k).filter(getter).map(num => {
+    board[num] = player // play the piece
+    var score = evaluateBoard(board, player)
+    console.log(`Position ${num} yield a score of ${score}`)
+    if (score > best.score) {
+      best = { position: num, score}
+    }
+    board[num] = null
+  })
+  return best
 }

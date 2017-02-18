@@ -23,8 +23,8 @@ const uniq = (set, next) => (!set.includes(next) && set.push(next), set)
 const hasWinner = triples => {
   var unique = triples.reduce(uniq, [])
   if (unique.length === 1) {
-    if (unique[0] === 'x') return 'x'
-    if (unique[0] === 'o') return 'o'
+    if (unique[0] === 'X') return 'X'
+    if (unique[0] === 'O') return 'O'
     return null
   }
 }
@@ -42,7 +42,7 @@ export default class TicTacToe {
 
   playerMove(x, y) {
     if(this.board[x][y] != null) { throw new Error("Cannot move on existing piece")}
-    this.board[x][y] = 'x'
+    this.board[x][y] = 'X'
     this.checkForVictory()
   }
 
@@ -60,7 +60,7 @@ export default class TicTacToe {
 
   computerMove([x, y]) {
     if(this.board[x][y] != null) { throw new Error("Cannot move on existing piece")}
-    this.board[x][y] = 'o'
+    this.board[x][y] = 'O'
     this.checkForVictory()
   }
   undoMove([x, y]) {

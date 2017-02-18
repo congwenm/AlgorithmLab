@@ -13,8 +13,8 @@
 // )
 import Matrix from './matrix'
 
-const xCanWin = triples => triples.every(p => p === 'x' || p == null)
-const oCanWin = triples => triples.every(p => p === 'o' || p == null)
+const xCanWin = triples => triples.every(p => p === 'X' || p == null)
+const oCanWin = triples => triples.every(p => p === 'O' || p == null)
 
 const aggregateOdds = (odds, triples) => {
   xCanWin(triples) && odds++
@@ -49,7 +49,7 @@ function isValid(board) {
   if (Array.isArray(board) && board.length === 3) {
     const deepValid = board.every(xCol => {
       return Array.isArray(xCol) && xCol.length === 3 && xCol.every(
-        coord => coord == null || coord === 'x' || coord === 'o'
+        coord => coord == null || coord === 'X' || coord === 'O'
       )
     })
 
