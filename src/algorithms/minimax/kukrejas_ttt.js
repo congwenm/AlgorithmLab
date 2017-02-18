@@ -8,11 +8,13 @@ const Three_in_a_Row = [
   [ 0, 4, 8 ],
   [ 2, 4, 6 ]
 ];
+
+// [player] [opponent]
 const Heuristic_Array = [
-  [     0,   -10,  -100, -1000 ],
-  [    10,     0,     0,     0 ],
-  [   100,     0,     0,     0 ],
-  [  1000,     0,     0,     0 ]
+  [     0,   -10,  -100, -1000 ], // if player has 0
+  [    10,     0,     0,     0 ], // if player has 1, from this point the opponent has 0 chance of winning this combo
+  [   100,     0,     0,     0 ], // if player has 2
+  [  1000,     0,     0,     0 ]  // if player has 3
 ];
 
 // @param board - chars<Array>
@@ -22,20 +24,20 @@ export const evaluatePosition = (board, player) => {
   var piece
   var players
   var others
-  var t = 0
+  var result = 0
 
   for (let i = 0; i < 8; i++) {
-    players = others = 0
+    players = others = 0            // on each evaluation, reset `others` and `player` to 0
     for (let j = 0; j < 3; j++) {
-      piece = board[Three_in_a_Row[i][j]];
+      piece = board[Three_in_a_Row[i][j]]; // for each position of the winning combo
 
-      if(piece == player)
+      if(piece == player)              // if the position is occupied by player, player++
         players++;
-      else if (piece == opponent)
+      else if (piece == opponent)     // else others gains
         others++;
     }
-    t += Heuristic_Array[players][others]
+    result += Heuristic_Array[players][others] // for this combination, fetch the score
   }
 
-  return t
+  return result
 }
