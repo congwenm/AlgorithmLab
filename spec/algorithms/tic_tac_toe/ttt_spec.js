@@ -1,34 +1,8 @@
 import TTT from '../../../src/algorithms/tic_tac_toe/ttt'
 
-const sdescribe = () => {}
-
 describe(TTT, () => {
   let ttt
-  beforeEach(() => {
-    ttt = new TTT
-  })
-
-  describe('setup', () => {
-    it('should be a 3 x 3 array', () => {
-      // ttt.view()
-    })
-  })
-
-  describe('#moveOptions', () => {
-    it('should return remaining open spaces', () => {
-      expect(ttt.moveOptions.length).toBe(9)
-      ttt.playerMove(0, 1)
-      expect(ttt.moveOptions.length).toBe(8)
-    })
-  })
-
-  describe('#computerRespond', () => {
-    it('should initially return center (1,1)', function() {
-      ttt.computerRespond()
-      // expect(ttt.moveOptions.length).toBe(7)
-      // expect(ttt.board[1][1] != null).toBe(true)
-    })
-  })
+  beforeEach(() => ttt = new TTT )
 
   describe('#checkForVictory', () => {
     it('returns `x` if row match', () => {
@@ -45,7 +19,7 @@ describe(TTT, () => {
       expect(ttt.checkForVictory()).toBe('X')
     })
 
-    it('returns `x` if dia match', () => {
+    it('returns `x` if diagonal match', () => {
       ttt.board[0][0] = 'X'
       ttt.board[1][1] = 'X'
       ttt.board[2][2] = 'X'
@@ -64,7 +38,7 @@ describe(TTT, () => {
     })
   })
 
-  sdescribe('progression', () => {
+  xdescribe('progression E2E', () => {
     it('should evaluate a continuous game', () => {
       ttt.playerMove(1, 1)
       ttt.view()

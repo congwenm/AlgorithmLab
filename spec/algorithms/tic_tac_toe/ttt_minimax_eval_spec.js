@@ -1,20 +1,9 @@
-import tttEval, { evaluatePlay } from '../../../src/algorithms/tic_tac_toe/first_ttt_eval'
+import TTTMMEval, { evaluatePlay } from '../../../src/algorithms/tic_tac_toe/ttt_minimax_eval'
 import Matrix from '../../../src/algorithms/tic_tac_toe/matrix'
 
-const getter = value => value
-
-describe('tttEval', () => {
-  it('should validate isValid', () => {
-    expect(() => tttEval(['X',])).toThrow()
-    expect(() => tttEval([[], [], []])).toThrow()
-    expect(() => tttEval([ [,,,], [,,,], [,,1] ])).toThrow()
-
-    expect(() => tttEval([ [,,,], [,,,], [,,,] ])).not.toThrow()
-    expect(() => tttEval([ [,,,], [,,,], [,,'X'] ])).not.toThrow()
-  })
-
+describe('Tic Tac Toe Evaluation using Minimax', () => {
+  let board
   describe("selection", () => {
-    let board
     beforeEach(() => {
       board = Matrix.from([
         [null, null, null],
@@ -25,10 +14,10 @@ describe('tttEval', () => {
 
     it('should return center as best starting position', () => {
 
-      var xScore = tttEval(board, 'X')
+      var xScore = evaluatePlay(board, 'X')
       console.log(`XSCORE: ${xScore}`)
 
-      var oScore = tttEval(board, 'O')
+      var oScore = evaluatePlay(board, 'O')
       console.log(`OSCORE: ${oScore}`);
 
       // try all other
