@@ -1,4 +1,4 @@
-import tttEval, { evaluatePlay } from '../../../src/algorithms/tic_tac_toe/ttt_eval'
+import tttEval, { evaluatePlay } from '../../../src/algorithms/tic_tac_toe/first_ttt_eval'
 import Matrix from '../../../src/algorithms/tic_tac_toe/matrix'
 
 const getter = value => value

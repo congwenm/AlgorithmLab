@@ -1,4 +1,5 @@
 // static evaluation for tic-tac-toe
+import Matrix from './matrix'
 
 // @param[board] - 2D array noting the x and y on the grid
 // _|_|_
@@ -27,9 +28,6 @@ const scoreTriples = (playerPiece) => {
     }
   }
 }
-
-
-import Matrix from './matrix'
 
 // @params player - 'X' or 'O'
 const evaluateBoard = (board, player) => {
