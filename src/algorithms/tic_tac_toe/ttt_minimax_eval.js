@@ -19,7 +19,7 @@ export default class TTTEval {
   mmSearch(tttGame, callback) {
     const benchmarker = new Benchmarker
     // get all moves
-    let moveOptions = tttGame.moveOptions // ({ max: true })
+    let moveOptions = tttGame.vacant // ({ max: true })
 
     let bestMove = null
 
@@ -27,10 +27,10 @@ export default class TTTEval {
     moveOptions.forEach(
       move => {
         // make a move
-        tttGame.computerMove(move)
+        tttGame.computerMove(move) // computer move, compueter is Max
 
         // evaluate and assign to move, determine whether or not to do statical evaluation
-        move.value = this.alphaBeta(9, -Infinity, Infinity, { isMax: false })
+        move.value = this.alphaBeta(9, -Infinity, Infinity, { isMax: false }) // generate alphabeta options for hypothetic player.
 
         if (bestMove == null || move.value >= bestMove.value) {
           bestMove = move
@@ -49,7 +49,7 @@ export default class TTTEval {
   }
 
   alphaBeta (depth, alpha, beta, { isMax }) {
-    // return evaluation if reaching leaf nod eor any side won
+    // return evaluation if reaching leaf node or any side won
     if (depth == 0 || this.checkForVictory() !== null) {
       return TTTEval(this.board)
     }
