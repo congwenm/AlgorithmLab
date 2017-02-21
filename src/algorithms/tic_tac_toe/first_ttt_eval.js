@@ -30,7 +30,7 @@ const scoreTriples = (playerPiece) => {
 }
 
 // @params player - 'X' or 'O'
-const evaluateBoard = (board, player) => {
+export const evaluateBoard = (board, player) => {
   if (!isValid(board)) { throw new Error('Cannot evaluate false board construction') }
 
   if (!(board instanceof Matrix)) {
