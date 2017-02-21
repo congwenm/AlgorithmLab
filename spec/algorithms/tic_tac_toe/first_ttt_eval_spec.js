@@ -3,7 +3,7 @@ import Matrix from '../../../src/algorithms/tic_tac_toe/matrix'
 
 const getter = value => value
 
-describe('tttEval', () => {
+describe('first tttEval', () => {
   it('should validate isValid', () => {
     expect(() => tttEval(['X',])).toThrow()
     expect(() => tttEval([[], [], []])).toThrow()
