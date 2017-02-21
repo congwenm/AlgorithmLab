@@ -1,4 +1,7 @@
 import { evaluateBoard } from './first_ttt_eval'
+
+const getter = value => value
+
 // used to benchmark
 class Benchmarker {
   constructor() { this.start = process.hrtime() }
@@ -10,7 +13,22 @@ class Benchmarker {
 }
 
 export function evalModel(board, player) {
-  return evaluateBoard(board, player)
+  // return evaluateBoard(board, player)
+
+  // simpler
+  const possibleWin = piece => piece == null || piece == player
+  var rowWins = board.getRows().map(
+    row => row.every(possibleWin)
+  )
+  var colWins = board.map(
+    col => col.every(possibleWin)
+  )
+  var diagWins = [
+    [board[0][0], board[1][1], board[2][2]],
+    [board[2][0], board[1][1], board[0][2]]
+  ].map(diag => diag.every(possibleWin))
+  
+  return [...rowWins, ...colWins, ...diagWins].filter(getter).length
 }
 
 export function evaluatePlay (game, player) {
@@ -29,7 +47,7 @@ export default class TTTMinimax {
   respond(callback) {
     var bestMove = this.search()
     // make the move
-    callback(move)
+    callback(bestMove)
   }
 
   search() {
@@ -60,7 +78,7 @@ export default class TTTMinimax {
 
     // time the algorithm
     benchmarker.end()
-    console.log(`ALL SCORES: \n ${moveOptions.map(m => `${m}${m.value}`).join('\n')}`)
+    console.log(`ALL SCORES: \n ${moveOptions.map(m => `${m.position}: ${m.value}`).join('\n')}`)
     console.log(`BEST MOVE IS: ${bestMove}`)
 
     return bestMove
@@ -104,7 +122,7 @@ export default class TTTMinimax {
       this.game.undoMove(move.position)
 
       // cut-off, `prune`, no need to go down further, there's no answer here
-      // if (beta <= alpha) return true;
+      if (beta <= alpha) return true;
     })
 
     console.log("EVALUATED VALUE OF " + (isMax ? alpha : beta))

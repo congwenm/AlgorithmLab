@@ -28,9 +28,9 @@ fdescribe('Tic Tac Toe Evaluation using Minimax', () => {
       evaluatePlay(game, 'O')
     })
 
-    fit('should return center as the best position', () => {
+    it('should return center as the best position', () => {
       console.log(`best play for player "O" is ${evaluatePlay(game, 'O').position}`)
-      // expect(evaluatePlay(game, 'O').position).toEqual([1,1])
+      expect(evaluatePlay(game, 'O').position).toEqual([1,1])
     })
 
     it('self-preservation', () => {
@@ -48,6 +48,14 @@ fdescribe('Tic Tac Toe Evaluation using Minimax', () => {
 
       // O should play board[6]
       expect(evaluatePlay(game, 'O').position).toEqual([2, 0])
+    })
+
+    it('knows how to win', () => {
+      game.board[0][0] = 'O'
+      game.board[1][1] = 'O'
+
+      // O should play board[6]
+      expect(evaluatePlay(game, 'O').position).toEqual([2, 2])
     })
   })
 })
