@@ -1,0 +1,36 @@
+html
+  head
+    title Express HTML
+    script(src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js')
+    link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css')
+    link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap-theme.min.css')
+    script(src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js')
+
+    style(type='text/css').
+      table, th, td {
+        border: 1px solid black;
+      }
+      td {
+        padding: 20px;
+      }
+
+  body
+    div(style='margin: 0 100px;')
+      nav.navbar.navbar-inverse.navbar-static-top
+      .jumbotron(style='padding:40px;')
+        div #{game.currentPlayer}'s turn
+        div #{game.winner && `${game.winner} has won!`}
+        table
+          tr
+            td #{game.board[0][0]}
+            td #{game.board[0][1]}
+            td #{game.board[0][2]}
+          tr
+            td #{game.board[1][0]}
+            td #{game.board[1][1]}
+            td #{game.board[1][2]}
+          tr
+            td #{game.board[2][0]}
+            td #{game.board[2][1]}
+            td #{game.board[2][2]}
+          table
