@@ -4,6 +4,7 @@ var TTT     = require('./ttt_compiled.js')
 
 var app = express()
 var game = new TTT()
+game.playerMove([1,1])
 
 app.set('view engine', 'pug');
 app.set('views', __dirname);

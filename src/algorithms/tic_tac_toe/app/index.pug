@@ -4,7 +4,23 @@ html
     script(src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js')
     link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css')
     link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap-theme.min.css')
-    script(src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js')
+    script(src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.wmin.js')
+
+    script.
+      var sendMove = function(move) {
+        var xhttp = new XMLHttpRequest()
+        xhttp.onreadystatechange = function() {
+          if (this.readyState == 4 && this.status == 200) {
+            console.log('done')
+          }
+        }
+        xhttp.open("POST", "/move", true)
+        xhttp.send(move)
+      }
+
+      function playerMove(x, y) {
+        sendMove(x, y)
+      }
 
     style(type='text/css').
       table, th, td {
@@ -22,15 +38,15 @@ html
         div #{game.winner && `${game.winner} has won!`}
         table
           tr
-            td #{game.board[0][0]}
-            td #{game.board[0][1]}
-            td #{game.board[0][2]}
+            td(onClick="playerMove(0, 0)") #{game.board[0][0] || '_'}
+            td(onClick="playerMove(1, 0)") #{game.board[1][0] || '_'}
+            td(onClick="playerMove(2, 0)") #{game.board[2][0] || '_'}
           tr
-            td #{game.board[1][0]}
-            td #{game.board[1][1]}
-            td #{game.board[1][2]}
+            td(onClick="playerMove(0, 1)") #{game.board[0][1] || '_'}
+            td(onClick="playerMove(1, 1)") #{game.board[1][1] || '_'}
+            td(onClick="playerMove(2, 1)") #{game.board[2][1] || '_'}
           tr
-            td #{game.board[2][0]}
-            td #{game.board[2][1]}
-            td #{game.board[2][2]}
+            td(onClick="playerMove(0, 2)") #{game.board[0][2] || '_'}
+            td(onClick="playerMove(1, 2)") #{game.board[1][2] || '_'}
+            td(onClick="playerMove(2, 2)") #{game.board[2][2] || '_'}
           table
