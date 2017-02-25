@@ -122,7 +122,7 @@ function evalModel(board, player) {
     [board[0][0], board[1][1], board[2][2]],
     [board[2][0], board[1][1], board[0][2]]
   ].map(diag => diag.every(possibleWin));
-  
+
   return [...rowWins, ...colWins, ...diagWins].filter(getter$1).length
 }
 
@@ -155,7 +155,7 @@ class TTTMinimax {
         this.game.computerMove(move.position); // computer move, compueter is Max
 
         // evaluate and assign to move, determine whether or not to do statical evaluation
-        debugger
+        // debugger
         move.value = this.alphaBeta(2, -Infinity, Infinity, { isMax: false }); // generate alphabeta options for hypothetic player.
         console.log(this.game.view());
 
@@ -233,19 +233,19 @@ class TicTacToe {
     new TTTMinimax({
       game: this,
       player: 'O'
-    }).respond(move => this.computerMove(move));
+    }).respond(move => this.computerMove(move.position));
   }
 
   computerMove([x, y]) {
     if(this.board[x][y] != null) { throw new Error("Cannot move on existing piece")}
     this.board[x][y] = 'O';
-    this.checkForVictory();
+    this.checkForEndGame();
   }
 
   playerMove([x, y]) {
     if(this.board[x][y] != null) { throw new Error("Cannot move on existing piece")}
     this.board[x][y] = 'X';
-    this.checkForVictory();
+    this.checkForEndGame();
   }
 
   undoMove([x, y]) {
@@ -253,9 +253,14 @@ class TicTacToe {
     this.board[x][y] = null;
   }
 
-  checkForVictory() {
+  checkForEndGame() {
     this.winner = this.board.checkForVictory();
+    if (this.board.vacant.length === 0 && !this.winner) {
+      this.winner = "NO ONE";
+    }
   }
+
+  get hasEnded() { return !!this.winner }
 
   toString() { this.board.toString(); }
   view() { console.log('Current Board:\n', this.board.toString()); }

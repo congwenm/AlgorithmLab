@@ -30,7 +30,7 @@ app.post('/move', (req, res) => {
 
   if (game.board[x][y] == null) {
     game.playerMove([x, y])
-    game.computerRespond()
+    game.hasEnded || game.computerRespond()
   }
   res.render('index.pug', { game: game })
 })

@@ -7,6 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "game": "rollup --watch -i ../ttt.js -o ./ttt_compiled.js -f cjs",
     "start": "nodemon app.js",
+    "debug": "nodemon debug app.js",
     "lr": "find . -maxdepth 1 | entr livereload 2"
   },
   "keywords": [],

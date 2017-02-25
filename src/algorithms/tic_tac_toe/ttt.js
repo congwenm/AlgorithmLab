@@ -15,19 +15,19 @@ export default class TicTacToe {
     new TTTMinimax({
       game: this,
       player: 'O'
-    }).respond(move => this.computerMove(move))
+    }).respond(move => this.computerMove(move.position))
   }
 
   computerMove([x, y]) {
     if(this.board[x][y] != null) { throw new Error("Cannot move on existing piece")}
     this.board[x][y] = 'O'
-    this.checkForVictory()
+    this.checkForEndGame()
   }
 
   playerMove([x, y]) {
     if(this.board[x][y] != null) { throw new Error("Cannot move on existing piece")}
     this.board[x][y] = 'X'
-    this.checkForVictory()
+    this.checkForEndGame()
   }
 
   undoMove([x, y]) {
@@ -35,9 +35,14 @@ export default class TicTacToe {
     this.board[x][y] = null
   }
 
-  checkForVictory() {
+  checkForEndGame() {
     this.winner = this.board.checkForVictory();
+    if (this.board.vacant.length === 0 && !this.winner) {
+      this.winner = "NO ONE"
+    }
   }
+
+  get hasEnded() { return !!this.winner }
 
   toString() { this.board.toString() }
   view() { console.log('Current Board:\n', this.board.toString()) }

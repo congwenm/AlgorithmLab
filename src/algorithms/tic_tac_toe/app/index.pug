@@ -20,7 +20,12 @@ html
       nav.navbar.navbar-inverse.navbar-static-top
       .jumbotron(style='padding:40px;')
         a.btn.btn-primary(href="/reset") Reset
-        div #{game.winner ? `${game.winner} has won!` : `${game.currentPlayer}'s turn`}
+        if game.winner
+          p= `${game.winner} has won!`
+        else if game.winner === "NO ONE"
+          p= `Tied`
+        else
+          p= `${game.currentPlayer}'s turn`
         table
           -
           each row, rowIndex in game.board.getRows()
@@ -28,7 +33,7 @@ html
               -
               each block, colIndex in row
                 td
-                  if block == null
+                  if block == null && !game.hasEnded
                     form(onClick="this.submit()" action="/move" method="POST")
                       input(type="hidden" value=colIndex name="x")
                       input(type="hidden" value=rowIndex name="y")
