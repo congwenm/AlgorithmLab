@@ -33,29 +33,47 @@ fdescribe('Tic Tac Toe Evaluation using Minimax', () => {
       expect(evaluatePlay(game, 'O').position).toEqual([1,1])
     })
 
-    it('self-preservation', () => {
-      game.board[1][1] = 'X'
-      game.board[2][1] = 'O'
-      game.board[2][0] = 'X'
+    describe('self-preservation', () => {
+      it('defend diagonally', () => {
+        game.board[1][1] = 'X'
+        game.board[2][1] = 'O'
+        game.board[2][0] = 'X'
 
-      // O should play board[6]
-      expect(evaluatePlay(game, 'O').position).toEqual([0, 2])
+        // O should play board[6]
+        expect(evaluatePlay(game, 'O').position).toEqual([0, 2])
+      })
+
+      fit('defend vertically col 1', () => {
+        game.board[1][0] = 'X'
+        game.board[1][1] = 'X'
+        game.board[2][2] = 'O'
+        // O should play board[7]
+        expect(evaluatePlay(game, 'O').position).toEqual([1, 2])
+      })
+
+      fit('defend horizontally row 1', () => {
+        game.board[0][0] = 'X'
+        game.board[0][1] = 'X'
+        game.board[2][2] = 'O'
+        // O should play board[7]
+        expect(evaluatePlay(game, 'O').position).toEqual([0, 2])
+      })
     })
 
-    it('knows how to win', () => {
-      game.board[2][1] = 'O'
-      game.board[2][2] = 'O'
+    describe('knows how to win', () => {
+      it('checkmate vertically col 2', () => {
+        game.board[2][1] = 'O'
+        game.board[2][2] = 'O'
+        // O should play board[6]
+        expect(evaluatePlay(game, 'O').position).toEqual([2, 0])
+      })
 
-      // O should play board[6]
-      expect(evaluatePlay(game, 'O').position).toEqual([2, 0])
-    })
-
-    it('knows how to win', () => {
-      game.board[0][0] = 'O'
-      game.board[1][1] = 'O'
-
-      // O should play board[6]
-      expect(evaluatePlay(game, 'O').position).toEqual([2, 2])
+      it('checkmate diagonally', () => {
+        game.board[0][0] = 'O'
+        game.board[1][1] = 'O'
+        // O should play board[8]
+        expect(evaluatePlay(game, 'O').position).toEqual([2, 2])
+      })
     })
   })
 })
