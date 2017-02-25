@@ -94,7 +94,6 @@ class Board extends Matrix {
 }
 
 // static evaluation for tic-tac-toe
-// @params player - 'X' or 'O'
 
 const getter$1 = value => value;
 
