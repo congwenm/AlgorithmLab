@@ -225,6 +225,7 @@ class TicTacToe {
   constructor() {
     this.board = new Board({ width: 3, height: 3 });
     this.currentPlayer = 'X'; // assuming x moves first
+    this.winner = null;
   }
 
   // NOTE: does the minimaxing logic here.
@@ -238,16 +239,22 @@ class TicTacToe {
   computerMove([x, y]) {
     if(this.board[x][y] != null) { throw new Error("Cannot move on existing piece")}
     this.board[x][y] = 'O';
+    this.checkForVictory();
   }
 
   playerMove([x, y]) {
     if(this.board[x][y] != null) { throw new Error("Cannot move on existing piece")}
     this.board[x][y] = 'X';
+    this.checkForVictory();
   }
 
   undoMove([x, y]) {
     if(this.board[x][y] == null) { throw new Error("Cannot undo a move thats not there")}
     this.board[x][y] = null;
+  }
+
+  checkForVictory() {
+    this.winner = this.board.checkForVictory();
   }
 
   toString() { this.board.toString(); }

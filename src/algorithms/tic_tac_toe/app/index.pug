@@ -19,8 +19,8 @@ html
     div(style='margin: 0 100px;')
       nav.navbar.navbar-inverse.navbar-static-top
       .jumbotron(style='padding:40px;')
-        div #{game.currentPlayer}'s turn
-        div #{game.winner && `${game.winner} has won!`}
+        a.btn.btn-primary(href="/reset") Reset
+        div #{game.winner ? `${game.winner} has won!` : `${game.currentPlayer}'s turn`}
         table
           -
           each row, rowIndex in game.board.getRows()
@@ -37,21 +37,30 @@ html
                     div #{block}
 
   script.
-    var sendMove = function([x, y]) {
-      //- debugger
-      var xhttp = new XMLHttpRequest()
+    const ajax = function(method, url, params) {
+      const xhttp = new XMLHttpRequest()
+
       xhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
           console.log('done')
         }
       }
-      xhttp.open("POST", "/move", true)
+      xhttp.open(method, url, true)
       xhttp.setRequestHeader("Content-Type", "application/json")
-      xhttp.send(JSON.stringify({ x, y }))
+      xhttp.send(JSON.stringify(params))
+    };
+
+    var sendMove = function([x, y]) {
+      //- debugger
+      ajax('POST', '/move', { x, y })
     }
 
     function playerMove(x, y) {
       sendMove([x, y])
+    }
+
+    function reset(x, y) {
+      ajax('POST', '/reset');
     }
 
     //- document.querySelector('td').click()

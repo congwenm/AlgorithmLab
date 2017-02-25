@@ -17,13 +17,21 @@ app.get('/', (req, res) => {
   res.render('index.pug', { game: game })
 })
 
+app.get('/reset', (req, res) => {
+  game = new TTT()
+  res.render('index.pug', { game: game })
+})
+
 app.post('/move', (req, res) => {
   // console.log('asked to move', req.body)
   // console.log('asked to move', req.params)
   // console.log('asked to move', req.query)
   const {x, y} = req.body
-  game.playerMove([x, y])
-  // game.computerRespond()
+
+  if (game.board[x][y] == null) {
+    game.playerMove([x, y])
+    game.computerRespond()
+  }
   res.render('index.pug', { game: game })
 })
 
