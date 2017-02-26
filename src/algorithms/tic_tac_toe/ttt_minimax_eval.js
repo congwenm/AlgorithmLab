@@ -12,23 +12,55 @@ class Benchmarker {
   get result() { `Algorithm of #mmSearch took ${this.diff[0]}.${this.diff[1]}`}
 }
 
-export function evalModel(board, player) {
-  // return evaluateBoard(board, player)
+const makeSet = arr => arr.reduce((obj, item) => {
+  obj[item] = obj[item] + 1
+  return obj;
+}, { X: 0, O: 0 })
 
-  // simpler
-  const possibleWin = piece => piece == null || piece == player
-  var rowWins = board.getRows().map(
-    row => row.every(possibleWin)
-  )
-  var colWins = board.map(
-    col => col.every(possibleWin)
-  )
-  var diagWins = [
+const VALUE_MAP = [
+  [1, 10, 100, 1000], // X = 0
+  [-10, 0, 0, 0], // X = 1
+  [-100, 0, 0, 0], // X = 2
+  [-1000, 0, 0, 0] // X = 3
+]
+//   O: [
+//     [1, 10, 100, 1000], // X = 0
+//     [-10, 0, 0, 0], // X = 1
+//     [-100, 0, 0, 0], // X = 2
+//     [-1000, 0, 0, 0] // X = 3
+//   ]
+// }
+
+export const scoreTripletsByDepth = (depth, player) =>
+  (sum, triplets) => {
+    const VERSION = 1
+    var { X, O } = makeSet(triplets)
+
+    switch(VERSION) {
+      case 1: {
+        // if (depth === 2 && X === 3) {
+        //   return 10000
+        // }
+        return sum += VALUE_MAP[X][O]
+      }
+      case 2: {
+        if (X === 3 && O === 0)      return -1000
+        else if (X === 0 && O === 3) return 1000
+        else                         return 1
+      }
+    }
+  }
+
+// @params depth - use this figure out if the current turn you can achive kill without an hassle
+export function evalModel(board, player, depth) {
+  const rows = board.getRows()
+  const cols = board
+  const diags = [
     [board[0][0], board[1][1], board[2][2]],
     [board[2][0], board[1][1], board[0][2]]
-  ].map(diag => diag.every(possibleWin))
+  ]
 
-  return [...rowWins, ...colWins, ...diagWins].filter(getter).length
+  return [...rows, ...cols, ...diags].reduce(scoreTripletsByDepth(depth, player), 0)
 }
 
 export function evaluatePlay (game, player) {
@@ -79,23 +111,24 @@ export default class TTTMinimax {
     // time the algorithm
     benchmarker.end()
     console.log(`ALL SCORES: \n ${moveOptions.map(m => `${m.position}: ${m.value}`).join('\n')}`)
-    console.log(`BEST MOVE IS: ${bestMove}`)
+    console.log(`BEST MOVE FOR THE FOLLOWING IS: ${bestMove.position}`)
+    console.log(this.board.toString())
 
     return bestMove
   }
 
-  alphaBeta (depth, alpha, beta, { isMax }) {
-    console.log('CALLING `alphabeta` with ', arguments)
+  alphaBeta (...args) {
+    var [depth, alpha, beta, { isMax }] = args
+    console.log(`CALLING alphabeta with Depth ${depth}:`, args.slice(1))
     this.game.view()
     // return evaluation if reaching leaf node or any side won
     if (depth == 0 || this.board.checkForVictory() !== null) {
-      return evalModel(this.game.board, 'O')
+      return evalModel(this.game.board, 'O', depth)
     }
     var moveOptions = this.board.vacant // regardless of max or minimum
 
     // synchronized stuff, use find to be able to `prune`
     moveOptions.find(move => {
-      var temp = null
       // make the move, w/e the player?
       this.game[isMax ? 'computerMove' : 'playerMove'](move.position)
       const finalBeta = beta

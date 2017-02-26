@@ -43,7 +43,7 @@ fdescribe('Tic Tac Toe Evaluation using Minimax', () => {
         expect(evaluatePlay(game, 'O').position).toEqual([0, 2])
       })
 
-      fit('defend vertically col 1', () => {
+      it('defend vertically col 1', () => {
         game.board[1][0] = 'X'
         game.board[1][1] = 'X'
         game.board[2][2] = 'O'
@@ -51,12 +51,26 @@ fdescribe('Tic Tac Toe Evaluation using Minimax', () => {
         expect(evaluatePlay(game, 'O').position).toEqual([1, 2])
       })
 
-      fit('defend horizontally row 1', () => {
+      it('defend horizontally row 1', () => {
         game.board[0][0] = 'X'
         game.board[0][1] = 'X'
         game.board[2][2] = 'O'
         // O should play board[7]
         expect(evaluatePlay(game, 'O').position).toEqual([0, 2])
+      })
+
+      fit('defend to the last minute', () => {
+        game.board[1][1] = 'X'
+        game.board[2][2] = 'O'
+        game.board[2][0] = 'X'
+        game.board[0][2] = 'O'
+        game.board[1][2] = 'X'
+        game.board[1][0] = 'O'
+        game.board[2][1] = 'X'
+
+        // O should play board[7]
+        expect(evaluatePlay(game, 'O').position).toEqual([0, 1])
+
       })
     })
 
