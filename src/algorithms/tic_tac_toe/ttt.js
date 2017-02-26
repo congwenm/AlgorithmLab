@@ -40,10 +40,11 @@ export default class TicTacToe {
     if (this.board.vacant.length === 0 && !this.winner) {
       this.winner = "NO ONE"
     }
+    return this.winner
   }
 
   get hasEnded() { return !!this.winner }
 
   toString() { this.board.toString() }
-  view() { console.log('Current Board:\n', this.board.toString()) }
+  view() { this.board.view() }
 }

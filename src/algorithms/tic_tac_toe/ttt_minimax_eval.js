@@ -122,7 +122,7 @@ export default class TTTMinimax {
     console.log(`CALLING alphabeta with Depth ${depth}:`, args.slice(1))
     this.game.view()
     // return evaluation if reaching leaf node or any side won
-    if (depth == 0 || this.board.checkForVictory() !== null) {
+    if (depth == 0 || this.game.checkForEndGame() !== null) {
       return evalModel(this.game.board, 'O', depth)
     }
     var moveOptions = this.board.vacant // regardless of max or minimum

@@ -89,4 +89,8 @@ export class Board extends Matrix {
     // console.log("CHECKFORVICTORY", colWins, rowWins, diagWins)
     return [...colWins, ...rowWins, ...diagWins].filter(x => x)[0] || null
   }
+
+  view() {
+    console.log('Current Board:\n', this.toString())
+  }
 }

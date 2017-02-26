@@ -91,6 +91,10 @@ class Board extends Matrix {
     // console.log("CHECKFORVICTORY", colWins, rowWins, diagWins)
     return [...colWins, ...rowWins, ...diagWins].filter(x => x)[0] || null
   }
+
+  view() {
+    console.log('Current Board:\n', this.toString());
+  }
 }
 
 // static evaluation for tic-tac-toe
@@ -211,7 +215,7 @@ class TTTMinimax {
     console.log(`CALLING alphabeta with Depth ${depth}:`, args.slice(1));
     this.game.view();
     // return evaluation if reaching leaf node or any side won
-    if (depth == 0 || this.board.checkForVictory() !== null) {
+    if (depth == 0 || this.game.checkForEndGame() !== null) {
       return evalModel(this.game.board, 'O', depth)
     }
     var moveOptions = this.board.vacant; // regardless of max or minimum
@@ -289,12 +293,13 @@ class TicTacToe {
     if (this.board.vacant.length === 0 && !this.winner) {
       this.winner = "NO ONE";
     }
+    return this.winner
   }
 
   get hasEnded() { return !!this.winner }
 
   toString() { this.board.toString(); }
-  view() { console.log('Current Board:\n', this.board.toString()); }
+  view() { this.board.view(); }
 }
 
 module.exports = TicTacToe;
