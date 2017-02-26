@@ -97,7 +97,7 @@ export default class TTTMinimax {
 
         // evaluate and assign to move, determine whether or not to do statical evaluation
         // debugger
-        move.value = this.alphaBeta(2, -Infinity, Infinity, { isMax: false }) // generate alphabeta options for hypothetic player.
+        move.value = this.alphaBeta(1, -Infinity, Infinity, { isMax: false }) // generate alphabeta options for hypothetic player.
         console.log(this.game.view())
 
         if (bestMove == null || move.value >= bestMove.value) {

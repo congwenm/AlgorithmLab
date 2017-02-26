@@ -79,7 +79,7 @@ fdescribe('Tic Tac Toe Evaluation using Minimax', () => {
         game.board[2][1] = 'O'
         game.board[2][2] = 'O'
         // O should play board[6]
-        // expect(evaluatePlay(game, 'O').position).toEqual([2, 0])
+        expect(evaluatePlay(game, 'O').position).toEqual([2, 0])
         // actually more greedy, tries to force a victory
         // expect(evaluatePlay(game, 'O').position).toEqual([1, 1])
       })
