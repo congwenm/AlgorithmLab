@@ -151,4 +151,8 @@ export default class BinarySearchTree extends BSTNode{
       super(props)
     }
   }
+
+  view() {
+    this.key
+  }
 }

@@ -1,6 +1,8 @@
 import BST, { BSTNode } from '../../src/data_structures/binary_search_tree'
 
-fdescribe(BST, () => {
+const nit = () => {}
+
+fdescribe('BST', () => {
   var bst
   describe('constructor', () => {
     describe('single constructor', () => {
@@ -125,6 +127,13 @@ fdescribe(BST, () => {
     it('should delete the node', () => {
       bst.delete_randomized(bst, 4)
       expect(bst.all.map(n => n.value)).toEqual([1,2,3,5,6,7,8,9,10])
+    })
+  })
+
+  describe('#view', () => {
+    beforeEach(() => bst = new BST([1,2,3,4,5,6,7,8,9,10]))
+    fit('should print out the tree', () => {
+      bst.view()
     })
   })
 })
