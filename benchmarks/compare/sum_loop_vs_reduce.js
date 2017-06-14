@@ -1,28 +1,26 @@
-var Benchmark = require('benchmark')
-var suite  = new Benchmark.Suite
+const { simple } = require('./tools')
 
 const expand = n => Object.keys([...Array(n)]).map(n=>+n)
 const range = expand(100)
 
-suite
-  .add('using for loop', function() {
+simple({
+  'using for loop': function() {
     var sum = 0
     for (let i of range) {
       sum += i
     }
     return sum
-  })
-  .add('using reduce', function() {
+  },
+  'using reduce': function() {
     return range.reduce((sum, i) => sum + 1, 0)
-  })
-  .on('cycle', function(event) {
+  },
+  'cycle': function(event) {
     console.log(String(event.target));
-  })
-  .on('complete', function() {
+  },
+  'complete': function() {
     console.log('Fastest is ' + this.filter('fastest').map('name'))
-  })
-
-  .run({ async: true })
+  }
+})
 
 // result:
 //

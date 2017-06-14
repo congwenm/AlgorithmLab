@@ -1,3 +1,4 @@
+// not needed for running locally
 /*!
  * Benchmark.js <https://benchmarkjs.com/>
  * Copyright 2010-2016 Mathias Bynens <https://mths.be/>
