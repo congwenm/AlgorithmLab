@@ -1,7 +1,7 @@
-const { simple } = require('./tools')
+const { simple } = require('./helper/tools')
 
-const magic_const = new Proxy({}, { 
-  get: (target, name) => name 
+const magic_const = new Proxy({}, {
+  get: (target, name) => name
 })
 
 simple({

@@ -1,4 +1,4 @@
-const { simple } = require('./tools')
+const { simple } = require('./helper/tools')
 
 const expand = n => Object.keys([...Array(n)]).map(n=>+n)
 const range = expand(100)

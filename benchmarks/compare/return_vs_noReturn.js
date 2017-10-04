@@ -1,11 +1,11 @@
-const { simple } = require('./tools')
+const { simple } = require('./helper/tools')
 
 simple({
   'return': function() {
     return 1 + 1;
   },
   'no return': function() {
-    1 + 1; 
+    1 + 1;
   },
   'no context return': () => 1 + 1,
 })
