@@ -1,10 +1,15 @@
 var Benchmark = require('benchmark')
 
-const simple = (tests) => {
+const simple = (tests, opts = {}) => {
   var suite = new Benchmark.Suite;
 
   for (let test_name in tests) {
     suite.add(test_name, tests[test_name])
+  }
+
+  const { teardown } = opts;
+  if (teardown) {
+    suite.on('teardown', teardown)
   }
 
   suite.on('cycle', function(event) {

@@ -7,7 +7,7 @@ suite.add('if block', function() {
   }
 })
   .add('short circuit', function() {
-    true && 1 
+
   })
 
 // add listeners
