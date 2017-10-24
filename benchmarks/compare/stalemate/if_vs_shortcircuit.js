@@ -1,26 +1,27 @@
-var Benchmark = require('benchmark')
-var suite = new Benchmark.Suite;
-
-suite.add('if block', function() {
-  if (true) {
-    return 1
-  }
+const { simple } = require("../helper/tools");
+var str = 'str'
+simple({
+  'if block': () => {
+    if (str) {
+      return 'done'
+    }
+  },
+  'if else block': () => {
+    if (str) {
+      return 'done'
+    }
+    else {
+      return;
+    }
+  },
+  'short circuit': () => {
+    return str && 'done'
+  },
 })
-  .add('short circuit', function() {
 
-  })
-
-// add listeners
-  .on('cycle', function(event) {
-    console.log(String(event.target));
-  })
-
-  .on('complete', function() {
-    console.log('Fastest is ' + this.filter('fastest').map('name'))
-  })
-
-suite.run({ async: true })
-
-// if block x 91,947,843 ops/sec ±1.59% (88 runs sampled)
-// short circuit x 91,050,265 ops/sec ±1.75% (84 runs sampled)
-// Fastest is if block,short circuit
+// results:
+//
+// if block x 607,762,087 ops/sec ±0.98% (83 runs sampled)
+// if else block x 625,818,752 ops/sec ±0.91% (88 runs sampled)
+// short circuit x 623,653,442 ops/sec ±0.81% (86 runs sampled)
+// Fastest is if else block,short circuit

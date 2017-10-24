@@ -1,37 +1,30 @@
-var Benchmark = require('benchmark')
-var suite = new Benchmark.Suite;
+const { simple } = require("./helper/tools");
 
 var matrix = [
-  [1,2,3],
-  [4,5,6],
-  [7,8,9]
+  [1,2,3], [4,5,6], [7,8,9]
 ]
 
 var arrayAccessor = ([x, y]) => matrix[x][y]
 var objectAccessor = ({x, y}) => matrix[x][y]
 var signatureAccessor = (x, y) => matrix[x][y]
-suite.add('passing in array', () => {
-  arrayAccessor([1, 2]) === 6
-})
-.add('passing in object', () => {
-  objectAccessor({ x: 1, y: 2 }) === 6
-})
-.add('passing in large signature', () => {
-  signatureAccessor(1, 2) === 6
-})
 
-// add listeners
-.on('cycle', function(event) {
-  console.log(String(event.target));
+simple({
+  'passing in array': () => {
+    arrayAccessor([1, 2]) === 6
+  },
+  'passing in object': () => {
+    objectAccessor({ x: 1, y: 2 }) === 6
+  },
+  'passing in large signature': () => {
+    signatureAccessor(1, 2) === 6
+  },
 })
-
-.on('complete', function() {
-  console.log('Fastest is ' + this.filter('fastest').map('name'))
-})
-
-.run({ async: true })
 
 // Summary: array is slow!!!
-// passing in array x 7,995,622 ops/sec ±1.39% (87 runs sampled)
-// passing in object x 61,069,917 ops/sec ±1.63% (88 runs sampled)
-// passing in large signature x 75,377,709 ops/sec ±1.90% (84 runs sampled)
+// 1. array x
+//    73,415,163 ops/sec ±1.57% (82 runs sampled)
+// 2. object x
+//    569,065,963 ops/sec ±1.03% (88 runs sampled)
+// 3. signature x
+//    603,267,035 ops/sec ±0.86% (87 runs sampled)
+// Fastest is passing in large signature
