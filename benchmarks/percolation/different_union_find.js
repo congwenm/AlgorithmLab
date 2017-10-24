@@ -8,6 +8,6 @@ const { QuickFind, QuickUnion, WeightedQuickUnion } = UnionFind;
 
 
 
-// printGrid(generateGrid(10, 0.5))
+printGrid(generateGrid(10, 0.5))
 console.log('----------- END -----------')
-// console.log(generateGrid(10, 0.5))
+console.log(generateGrid(10, 0.5))
