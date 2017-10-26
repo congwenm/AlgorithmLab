@@ -1,6 +1,3 @@
-import surgeonkit from 'surgeonkit'
-var { expand } = surgeonkit
-
 // eager
 class QuickFind {
   constructor (n, arranges) {

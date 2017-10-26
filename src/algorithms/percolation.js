@@ -1,8 +1,4 @@
-import surgeonkit from 'surgeonkit'
-const { expand } = surgeonkit
 import UnionFind from '../data_structures/union_find'
-import { shuffle } from '../../src/util'
-
 
 // tools
 export const generateGrid = function(dimension, openRatio) {
@@ -10,8 +6,8 @@ export const generateGrid = function(dimension, openRatio) {
   var openArea = area * openRatio
   return shuffle(expand(area).map((v, k) => k < openArea))
     .reduce((matr, elem, i) => {
-      i % dimension === 0 ? matr.push([elem]) : matr[matr.length-1].push(elem); 
-      return matr 
+      i % dimension === 0 ? matr.push([elem]) : matr[matr.length-1].push(elem);
+      return matr
     }, [])
 }
 
@@ -34,35 +30,35 @@ export default function Percolation(matrix) {
       if (!coord) { continue; }
       if (rowAtY[x+1]) {
         this.arranges.push([
-          y * matrix.length + x, 
+          y * matrix.length + x,
           y * matrix.length + x + 1
         ])
       }
       if (matrix[y+1] && matrix[y+1][x]) {
         this.arranges.push([
-          y * matrix.length + x, 
+          y * matrix.length + x,
           (y+1) * matrix.length + x
         ])
       }
     }
-  } 
+  }
 }
 
 Object.assign(Percolation.prototype, {
 
-  // tell if an array percolates from top to bottom 
+  // tell if an array percolates from top to bottom
   isPercolated () {
     var topPercolateIndex = this.size
     var bottomPercolateIndex = this.size + 1
 
     var topPercolateArranges = this.grid.slice(0, 1)[0]
-      .map((value, x) => 
-        value && [topPercolateIndex, this.width * x]  
+      .map((value, x) =>
+        value && [topPercolateIndex, this.width * x]
       ).filter(v => v)
-      
+
     var bottomPercolateArranges = this.grid.slice(-1)[0]
-      .map((value, x) => 
-        value && [bottomPercolateIndex, (this.grid.length-1) * this.width + x]  
+      .map((value, x) =>
+        value && [bottomPercolateIndex, (this.grid.length-1) * this.width + x]
       ).filter(v => v)
 
     // console.log('topPercolateArranges', topPercolateArranges);
@@ -79,14 +75,14 @@ Object.assign(Percolation.prototype, {
     //     bottom_percolate (pad)
 
     var paddedArranges = [
-      ...topPercolateArranges, 
+      ...topPercolateArranges,
       ...this.arranges,
       ...bottomPercolateArranges,
     ]
-    
+
     // find if topPercolate is connected to bottomPercolate, which are appeneded at the end, hence we pass {n} as `this.size + 2`
     return (new UnionFind.QuickFind(
-      this.size + 2, 
+      this.size + 2,
       paddedArranges
     )).find(topPercolateIndex, bottomPercolateIndex)
   },

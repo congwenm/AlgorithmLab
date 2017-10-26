@@ -1,4 +1,3 @@
-import surgeonkit from 'surgeonkit';
 import paullewisQuickSort, { partition } from '../../../src/sorting/implementations/paullewis_quick_sort';
 import { ascendingVerifier } from '../../../src/util'
 
@@ -11,7 +10,7 @@ describe('#paullewisQuickSort', () => {
   it('should sort 100 numbers', () => {
     expect(ascendingVerifier(
       paullewisQuickSort(
-        surgeonkit.expand(20).map(n => (Math.random() * 100) | 0)
+        expand(20).map(n => (Math.random() * 100) | 0)
       )
     )).toBe(true)
   })
@@ -19,7 +18,7 @@ describe('#paullewisQuickSort', () => {
   xit('should sort 1,000 numbers', () => {
     expect(ascendingVerifier(
       paullewisQuickSort(
-        surgeonkit.expand(1000).map(n => (Math.random() * 1000) | 0)
+        expand(1000).map(n => (Math.random() * 1000) | 0)
       )``
     )).toBe(true)
   })

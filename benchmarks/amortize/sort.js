@@ -1,4 +1,3 @@
-import surgeonkit from 'surgeonkit'
 // argv[0] is /usr/local/bin/node
 // argv[1] is __filename
 import Benchmark, { Suite } from 'benchmark'

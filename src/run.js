@@ -1,15 +1,10 @@
 import Jasmine from 'jasmine'
 import * as util from './util'
-import surgeonkit from 'surgeonkit'
 import path from 'path';
 
 // test setup helper methods
 for (let meth in util) {
   global[meth] = util[meth]
-}
-
-for (let meth in surgeonkit) {
-  global[meth] = surgeonkit[meth]
 }
 
 var jasmine = new Jasmine()

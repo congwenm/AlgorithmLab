@@ -1,16 +1,28 @@
-import surgeonkit from 'surgeonkit'
+export const expand = n => [...Array(n).keys()];
+
+export const every = groupsOf => {
+  return function (arr, callback) {
+    let ending = arr.length - groupsOf;
+    var newArr = []
+    for (let i = 0; i <= ending; i++) {
+      let group = arr.slice(i, i + groupsOf);
+      newArr.push(callback.apply(this, group))
+    }
+    return newArr;
+  }
+}
+
 
 // methods that generates data implements caching to avoid data generation becoming part of the benchmark
-
 export const sampleWithCache = function(num) {
   if (sample[num]) { return sample[num]; }
-  return sample[num] = surgeonkit.expand(num).map(
+  return sample[num] = expand(num).map(
     n => Math.ceil(Math.random() * num)
   )
 };
 
 export const sample = function(num) {
-  return surgeonkit.expand(num).map(
+  return expand(num).map(
     n => Math.ceil(Math.random() * num)
   )
 };
@@ -18,7 +30,7 @@ export const sample = function(num) {
 
 export const ordered = function(num) {
   if(ordered[num]) { return ordered[num]; }
-  return ordered[num] = surgeonkit.expand(num).map(
+  return ordered[num] = expand(num).map(
     n => n+1
   )
 }
@@ -29,7 +41,7 @@ export const reverse_order = function(num) {
 }
 
 export const padding = function(val, number, direction) {
-  var pad = surgeonkit.expand(number).map(n => ' ').join('')
+  var pad = expand(number).map(n => ' ').join('')
   return (pad + val.toString()).slice(-number)
 }
 
@@ -70,14 +82,21 @@ const greaterThanOrEqualTo = (unit1, unit2) => unit2 >= unit1
 const lessThanOrEqualTo = (unit1, unit2) => unit2 <= unit1
 
 export const ascendingVerifier = (arr) => {
-  return surgeonkit.every(2)(arr, greaterThanOrEqualTo).every(t => t)
+  return every(2)(arr, greaterThanOrEqualTo).every(t => t)
 }
 
 export const descendingVerifier = (arr) => {
-  return surgeonkit.every(2)(arr, lessThanOrEqualTo).every(t => t)
+  return every(2)(arr, lessThanOrEqualTo).every(t => t)
 }
 
-export default {
+let ze_global = null
+try {
+  ze_global = global
+} catch(e) {
+  ze_global = window
+}
+
+export default (ze_global).utils = {
   sample,
   sampleWithCache,
   ordered,
