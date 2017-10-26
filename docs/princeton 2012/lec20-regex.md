@@ -83,7 +83,7 @@ A: Yes, because *some* sequence of legal transitions ends in state 11.
           A         A         A         A         B              D
 0 -> 1 -> 2 => 3 -> 2 => 3 -> 2 => 3 -> 2 -> 3 -> 4 => 5 -> 8 -> 9 => 10 -> 11
             /                                   \                             \
-    match transition:                       e-transition:                   accept state reached, 
+    match transition:                       e-transition:                   accept state reached,
     scan to next input                      change state w/o match          all text scanned, pattern found.
     character and change state
 ```
@@ -102,7 +102,7 @@ A. Systematically consider *all* possible transition sequences.
 # 3 NFA Simulation
 
 ## NFA representation
-*State names*. Integers from 0 to M. 
+*State names*. Integers from 0 to M.
                                   \
                                   number of symbols in RE
 
@@ -138,14 +138,14 @@ v/ = red eps-transition
          \____________________/
 ```
 1. initially, by e-transion, we can get to `0,1,2,3,4,6`, without scanning a single character
-2. next thing to do is to read the *A* in either state 2 or 6, those are gonna be match transitions, 
+2. next thing to do is to read the *A* in either state 2 or 6, those are gonna be match transitions,
   Matches 1st A
-3. state reachable after reading A is cases 3 and 7. 
-4. by epsilon transitions 3 can go to `2,3,4`, 
+3. state reachable after reading A is cases 3 and 7.
+4. by epsilon transitions 3 can go to `2,3,4`,
 5. 3 will match another A
   Matches 2nd A
 6. 7 cannot match so that's gone, now we can match `2,3,4`
-7. only state 4 matches B 
+7. only state 4 matches B
   Matches 3rd B
 8. end up in state 5. *|*, with e-transition to `5,8,9`.
 9. match transition matches D on 9
@@ -180,10 +180,10 @@ public class NFA {
   }
 
   // return true or false by simulating the operation
-  public boolean recognizes(String txt) {  
+  public boolean recognizes(String txt) {
     Bag<Integer> pc = new Bag<INteger>();           // set of all possible states NFA could be in. (program powder)
     DirectedDFS dfs = new DirectedDFS(G, 0);        // states reachable from start by e-transition
-    for (int v = 0; v < G.V(); v++)               
+    for (int v = 0; v < G.V(); v++)
       if (dfs.marked(v)) pc.add(v);                 // put all states you can get to into the `pc`
 
     for (int i = 0; i < txt.length(); i++) {
@@ -200,9 +200,9 @@ public class NFA {
         if (dfs.marked(v)) pc.add(v)            // put all the states you can get to via `e-transition`
     }
 
-    for (int v : pc) 
+    for (int v : pc)
       if (v == M) return true;                  // accept if can end in state M
-    return false;                            
+    return false;
   }
 
   public Digraph buildEpsilonTransitionDigraph() {
@@ -253,15 +253,15 @@ public class NFA {
   *Metacharacters* `( ) . * |`
 *Parenthesis* Add `e-transition` edge from parentheses to the next state
 *Closure* Add three `e-transition` edges for each * operator
-    
-    A* becomes  
+
+    A* becomes
 
 ```
       __
     v/  \v
     A => * ->
 ```
-  
+
   (...)* becomes
 
 ```
@@ -271,7 +271,7 @@ public class NFA {
 ```
 
 *Or* Add two `e-transition edges for each | operator
-  
+
   (___|___) becomes
 
 ```

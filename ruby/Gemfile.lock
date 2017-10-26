@@ -1,0 +1,15 @@
+GEM
+  remote: https://rubygems.org/
+  specs:
+    benchmark-ips (2.7.2)
+    byebug (9.1.0)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  benchmark-ips
+  byebug
+
+BUNDLED WITH
+   1.13.6
