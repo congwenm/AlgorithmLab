@@ -1,6 +1,7 @@
 import Jasmine from 'jasmine'
-import * as util from '../src/util'
+import * as util from './util'
 import surgeonkit from 'surgeonkit'
+import path from 'path';
 
 // test setup helper methods
 for (let meth in util) {
@@ -12,8 +13,7 @@ for (let meth in surgeonkit) {
 }
 
 var jasmine = new Jasmine()
-jasmine.loadConfigFile('spec/support/jasmine.json')
-
+jasmine.loadConfigFile(path.join(__dirname, "support/jasmine.json"));
 jasmine.onComplete(function(passed) {
   if(passed) {
     console.log('All specs have passed');

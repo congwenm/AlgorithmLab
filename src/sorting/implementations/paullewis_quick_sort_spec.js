@@ -20,7 +20,7 @@ describe('#paullewisQuickSort', () => {
     expect(ascendingVerifier(
       paullewisQuickSort(
         surgeonkit.expand(1000).map(n => (Math.random() * 1000) | 0)
-      )
+      )``
     )).toBe(true)
   })
 
