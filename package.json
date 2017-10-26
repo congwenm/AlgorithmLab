@@ -18,6 +18,7 @@
   "license": "ISC",
   "devDependencies": {
     "animate.css": "git+https://github.com/daneden/animate.css.git",
+    "babel-cli": "^6.26.0",
     "babel-core": "^6.7.2",
     "babel-eslint": "^6.1.0",
     "babel-loader": "^6.2.4",
