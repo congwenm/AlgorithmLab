@@ -1,14 +1,15 @@
+include('util');
 import UnionFind from '../data_structures/union_find'
 
 // tools
 export const generateGrid = function(dimension, openRatio) {
   var area = dimension * dimension
   var openArea = area * openRatio
-  return shuffle(expand(area).map((v, k) => k < openArea))
+  return util.shuffle(util.expand(area).map((v, k) => k < openArea))
     .reduce((matr, elem, i) => {
       i % dimension === 0 ? matr.push([elem]) : matr[matr.length-1].push(elem);
       return matr
-    }, [])
+    }, []);
 }
 
 export const printGrid = function(grid) {

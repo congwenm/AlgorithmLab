@@ -111,8 +111,12 @@ const util = zeglobal.util = {
 }
 
 // pollution global space
-for (let meth in util) {
-  zeglobal[meth] = util[meth]
-}
+// for (let meth in util) {
+//   zeglobal[meth] = util[meth]
+// }
+
+zeglobal.base_dir = __dirname
+zeglobal.abs_path = path => base_dir + path
+zeglobal.include = file => require(abs_path('/' + file))
 
 export default util

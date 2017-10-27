@@ -1,4 +1,4 @@
-import UnionFind from '../../src/data_structures/union_find'
+import UnionFind from "./union_find"
 const { QuickFind, QuickUnion, WeightedQuickUnion } = UnionFind
 
 // https://www.cs.princeton.edu/~rs/AlgsDS07/01UnionFind.pdf

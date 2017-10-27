@@ -1,4 +1,5 @@
-import Heap from '../../src/data_structures/heap'
+include('util');
+import Heap from "./heap"
 
 describe('#Heap', () => {
   var heap;
@@ -34,13 +35,13 @@ describe('#Heap', () => {
   })
 
   it('expect heap to not swap at all if inserted at reverse_order', function() {
-    var rev_arr = reverse_order(10)
+    var rev_arr = util.reverse_order(10)
     rev_arr.forEach(n => heap.insert(n))
     expect(heap.queue).toEqual([null, ...rev_arr])
   })
 
   it('expect heap largest to be in index 1', function() {
-    var orded_arr = ordered(10)
+    var orded_arr = util.ordered(10)
     orded_arr.forEach(n => heap.insert(n))
     expect(Math.max(...heap.queue)).toEqual(heap.queue[1])
   })

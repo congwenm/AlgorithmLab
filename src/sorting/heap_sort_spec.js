@@ -1,6 +1,7 @@
-import heap_sort, { eloquent_heap_sort } from '../../src/sorting/heap_sort';
-import Heap from '../../src/data_structures/heap'
-import EloquentHeap from '../../src/data_structures/implementations/eloquent_js_heap'
+include('util');
+import heap_sort, { eloquent_heap_sort } from "./heap_sort";
+import Heap from "../../src/data_structures/heap"
+import EloquentHeap from "../../src/data_structures/implementations/eloquent_js_heap"
 
 
 describe('heapsorts', function() {
@@ -25,25 +26,25 @@ describe('heapsorts', function() {
     })
 
     it('should sort out 20 items in order', function() {
-      expect(descendingVerifier(
+      expect(util.descendingVerifier(
         heap_sort(
-          expand(20).map(n => (Math.random() * 20) | 0)
+          util.expand(20).map(n => (Math.random() * 20) | 0)
         )
       )).toBe(true)
     })
 
     it('should sort out 100 items in order', function() {
-      expect(descendingVerifier(
+      expect(util.descendingVerifier(
         heap_sort(
-          expand(100).map(n => (Math.random() * 100) | 0)
+          util.expand(100).map(n => (Math.random() * 100) | 0)
         )
       )).toBe(true)
     })
 
     it('should sort out 10 * 1000 items in order', function() {
-      expect(descendingVerifier(
+      expect(util.descendingVerifier(
         heap_sort(
-          expand(10000).map(n => (Math.random() * 10000) | 0)
+          util.expand(10000).map(n => (Math.random() * 10000) | 0)
         )
       )).toBe(true)
 
@@ -63,25 +64,25 @@ describe('heapsorts', function() {
     })
 
     it('should sort out 20 items in order', function() {
-      expect(descendingVerifier(
+      expect(util.descendingVerifier(
         eloquent_heap_sort(
-          expand(20).map(n => (Math.random() * 20) | 0)
+          util.expand(20).map(n => (Math.random() * 20) | 0)
         )
       )).toBe(true)
     })
 
     it('should sort out 100 items in order', function() {
-      expect(descendingVerifier(
+      expect(util.descendingVerifier(
         eloquent_heap_sort(
-          expand(100).map(n => (Math.random() * 100) | 0)
+          util.expand(100).map(n => (Math.random() * 100) | 0)
         )
       )).toBe(true)
     })
 
     it('should sort out 10 * 1000 items in order', function() {
-      expect(descendingVerifier(
+      expect(util.descendingVerifier(
         eloquent_heap_sort(
-          expand(10000).map(n => (Math.random() * 10000) | 0)
+          util.expand(10000).map(n => (Math.random() * 10000) | 0)
         )
       )).toBe(true)
 

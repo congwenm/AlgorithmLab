@@ -1,7 +1,8 @@
+include('util');
 // eager
 class QuickFind {
   constructor (n, arranges) {
-    this.id = expand(n)
+    this.id = util.expand(n)
     arranges.forEach(pair => this.unite(...pair))
   }
 
@@ -18,7 +19,7 @@ class QuickFind {
 // lazy
 class QuickUnion {
   constructor(n, arranges) {
-    this.id = expand(n)
+    this.id = util.expand(n)
     arranges.map(pair => this.unite(...pair))
   }
 
@@ -37,7 +38,7 @@ class WeightedQuickUnion extends QuickUnion{
   constructor(n, arranges) {
     // super(n, [])
     super(n, [])
-    this.sz = expand(n).map(i => 1);
+    this.sz = util.expand(n).map(i => 1);
     arranges.forEach(pair => this.unite(...pair)) // need to specifically call this again so super.unite doesnt get used.
   }
 

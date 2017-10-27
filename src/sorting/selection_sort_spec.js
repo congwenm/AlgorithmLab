@@ -1,4 +1,5 @@
-import selectionSort from '../../src/sorting/selection_sort';
+include('util');
+import selectionSort from "./selection_sort";
 
 var scrambledNumbers = [5,1,2,3,4];
 describe('#selectionSort', () => {
@@ -7,9 +8,9 @@ describe('#selectionSort', () => {
   })
 
   it('should sort 100 numbers', () => {
-    expect(ascendingVerifier(
+    expect(util.ascendingVerifier(
       selectionSort(
-        expand(20).map(n => (Math.random() * 100) | 0)
+        util.expand(20).map(n => (Math.random() * 100) | 0)
       )
     )).toBe(true)
   })

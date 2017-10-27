@@ -1,4 +1,5 @@
-import plainSort from '../../src/sorting/plain_sort';
+include('util');
+import plainSort from "./plain_sort";
 
 var scrambledNumbers = [4,1,2,3,5];
 describe('#plainSort', () => {
@@ -7,17 +8,17 @@ describe('#plainSort', () => {
   })
 
   it('should sort 100 numbers', () => {
-    expect(ascendingVerifier(
+    expect(util.ascendingVerifier(
       plainSort(
-        expand(20).map(n => (Math.random() * 100) | 0)
+        util.expand(20).map(n => (Math.random() * 100) | 0)
       )
     )).toBe(true)
   })
 
   xit('should sort 1,000 numbers', () => {
-    expect(ascendingVerifier(
+    expect(util.ascendingVerifier(
       plainSort(
-        expand(1000).map(n => (Math.random() * 1000) | 0)
+        util.expand(1000).map(n => (Math.random() * 1000) | 0)
       )
     )).toBe(true)
   })

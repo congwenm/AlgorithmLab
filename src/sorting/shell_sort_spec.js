@@ -1,4 +1,5 @@
-import shellSort from '../../src/sorting/shell_sort';
+include('util');
+import shellSort from "./shell_sort";
 
 var scrambledNumbers = [5,1,2,3,4];
 describe('#shellSort', () => {
@@ -7,9 +8,9 @@ describe('#shellSort', () => {
   })
 
   it('should sort 100 numbers', () => {
-    expect(ascendingVerifier(
+    expect(util.ascendingVerifier(
       shellSort(
-        expand(20).map(n => (Math.random() * 100) | 0)
+        util.expand(20).map(n => (Math.random() * 100) | 0)
       )
     )).toBe(true)
   })

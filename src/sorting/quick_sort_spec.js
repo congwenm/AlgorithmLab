@@ -1,4 +1,5 @@
-import quickSort, { partition } from '../../src/sorting/quick_sort';
+include('util');
+import quickSort, { partition } from "./quick_sort";
 
 var scrambledNumbers = [5,1,2,3,4];
 describe('#quickSort', () => {
@@ -7,17 +8,17 @@ describe('#quickSort', () => {
   })
 
   it('should sort 100 numbers', () => {
-    expect(ascendingVerifier(
+    expect(util.ascendingVerifier(
       quickSort(
-        expand(100).map(n => (Math.random() * 100) | 0)
+        util.expand(100).map(n => (Math.random() * 100) | 0)
       )
     )).toBe(true)
   })
 
   xit('should sort 1,000 numbers', () => {
-    expect(ascendingVerifier(
+    expect(util.ascendingVerifier(
       quickSort(
-        expand(1000).map(n => (Math.random() * 1000) | 0)
+        util.expand(1000).map(n => (Math.random() * 1000) | 0)
       )
     )).toBe(true)
   })

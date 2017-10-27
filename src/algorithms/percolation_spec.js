@@ -1,4 +1,4 @@
-import Percolation, { generateGrid, printGrid } from '../../src/algorithms/percolation'
+import Percolation, { generateGrid, printGrid } from "./percolation"
 
 describe('Percolation', function() {
 

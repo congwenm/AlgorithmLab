@@ -1,16 +1,17 @@
-import bubbleSort from '../../src/sorting/bubble_sort'
+include('util');
+import bubbleSort from "./bubble_sort"
 
 var scrambled = [5,2,1,3,4]
 
 describe('bubbleSort', () => {
-  it('should sort `scrambled`', () => 
+  it('should sort `scrambled`', () =>
     expect(bubbleSort(scrambled)).toEqual([1,2,3,4,5])
   )
 
-  it('should sort 100 numbers into the correct order', () => 
+  it('should sort 100 numbers into the correct order', () =>
     expect(
-      ascendingVerifier(
-        expand(100).map(n => Math.ceil(Math.random(100)))
+      util.ascendingVerifier(
+        util.expand(100).map(n => Math.ceil(Math.random(100)))
       )
     ).toBe(true)
   )

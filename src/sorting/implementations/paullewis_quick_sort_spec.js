@@ -1,4 +1,5 @@
-import paullewisQuickSort, { partition } from '../../../src/sorting/implementations/paullewis_quick_sort';
+include('util');
+import paullewisQuickSort, { partition } from "./paullewis_quick_sort";
 
 var scrambledNumbers = [5,1,2,3,4];
 describe('#paullewisQuickSort', () => {
@@ -7,17 +8,17 @@ describe('#paullewisQuickSort', () => {
   })
 
   it('should sort 100 numbers', () => {
-    expect(ascendingVerifier(
+    expect(util.ascendingVerifier(
       paullewisQuickSort(
-        expand(20).map(n => (Math.random() * 100) | 0)
+        util.expand(20).map(n => (Math.random() * 100) | 0)
       )
     )).toBe(true)
   })
 
   xit('should sort 1,000 numbers', () => {
-    expect(ascendingVerifier(
+    expect(util.ascendingVerifier(
       paullewisQuickSort(
-        expand(1000).map(n => (Math.random() * 1000) | 0)
+        util.expand(1000).map(n => (Math.random() * 1000) | 0)
       )``
     )).toBe(true)
   })

@@ -1,4 +1,4 @@
-import BST, { BSTNode } from '../../src/data_structures/binary_search_tree'
+import BST, { BSTNode } from "./binary_search_tree"
 
 const nit = () => {}
 

@@ -1,4 +1,5 @@
-import insertionSort from '../../src/sorting/insertion_sort';
+include('util');
+import insertionSort from "./insertion_sort";
 
 var scrambledNumbers = [4,1,2,3,5];
 describe('#insertionSort', () => {
@@ -7,17 +8,17 @@ describe('#insertionSort', () => {
   })
 
   it('should sort 100 numbers', () => {
-    expect(ascendingVerifier(
+    expect(util.ascendingVerifier(
       insertionSort(
-        expand(20).map(n => (Math.random() * 100) | 0)
+        util.expand(20).map(n => (Math.random() * 100) | 0)
       )
     )).toBe(true)
   })
 
   it('should sort 1,000 numbers', () => {
-    expect(ascendingVerifier(
+    expect(util.ascendingVerifier(
       insertionSort(
-        expand(1000).map(n => (Math.random() * 1000) | 0)
+        util.expand(1000).map(n => (Math.random() * 1000) | 0)
       )
     )).toBe(true)
   })

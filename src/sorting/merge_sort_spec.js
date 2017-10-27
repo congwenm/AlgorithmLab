@@ -1,4 +1,5 @@
-import mergeSort, { merge } from '../../src/sorting/merge_sort';
+include('util');
+import mergeSort, { merge } from "./merge_sort";
 
 var scrambledNumbers = [5,1,2,3,4];
 describe('#mergeSort', () => {
@@ -7,9 +8,9 @@ describe('#mergeSort', () => {
   })
 
   it('should sort 100 numbers', () => {
-    expect(ascendingVerifier(
+    expect(util.ascendingVerifier(
       mergeSort(
-        expand(20).map(n => (Math.random() * 100) | 0)
+        util.expand(20).map(n => (Math.random() * 100) | 0)
       )
     )).toBe(true)
   })
