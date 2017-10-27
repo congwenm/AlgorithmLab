@@ -1,6 +1,6 @@
-export const expand = n => [...Array(n).keys()];
+const expand = n => [...Array(n).keys()];
 
-export const every = groupsOf => {
+const every = groupsOf => {
   return function (arr, callback) {
     let ending = arr.length - groupsOf;
     var newArr = []
@@ -14,38 +14,38 @@ export const every = groupsOf => {
 
 
 // methods that generates data implements caching to avoid data generation becoming part of the benchmark
-export const sampleWithCache = function(num) {
+const sampleWithCache = function(num) {
   if (sample[num]) { return sample[num]; }
   return sample[num] = expand(num).map(
     n => Math.ceil(Math.random() * num)
   )
 };
 
-export const sample = function(num) {
+const sample = function(num) {
   return expand(num).map(
     n => Math.ceil(Math.random() * num)
   )
 };
 
 
-export const ordered = function(num) {
+const ordered = function(num) {
   if(ordered[num]) { return ordered[num]; }
   return ordered[num] = expand(num).map(
     n => n+1
   )
 }
 
-export const reverse_order = function(num) {
+const reverse_order = function(num) {
   if(reverse_order[num]) { return reverse_order[num]; }
   return reverse_order[num] = ordered(num).reverse();
 }
 
-export const padding = function(val, number, direction) {
+const padding = function(val, number, direction) {
   var pad = expand(number).map(n => ' ').join('')
   return (pad + val.toString()).slice(-number)
 }
 
-export const max_by = function(arr, callback) {
+const max_by = function(arr, callback) {
   var maxValue = 0
   var maxIndice
   var tempValue
@@ -59,7 +59,7 @@ export const max_by = function(arr, callback) {
   return maxIndice
 }
 
-export const shuffle = function(arr, { lo, hi, mutable = false } = {}) {
+const shuffle = function(arr, { lo, hi, mutable = false } = {}) {
   if (!mutable) arr = arr.slice(lo, hi)
 
   var len = arr.length
@@ -81,29 +81,38 @@ const greaterThanOrEqualTo = (unit1, unit2) => unit2 >= unit1
 
 const lessThanOrEqualTo = (unit1, unit2) => unit2 <= unit1
 
-export const ascendingVerifier = (arr) => {
+const ascendingVerifier = (arr) => {
   return every(2)(arr, greaterThanOrEqualTo).every(t => t)
 }
 
-export const descendingVerifier = (arr) => {
+const descendingVerifier = (arr) => {
   return every(2)(arr, lessThanOrEqualTo).every(t => t)
 }
 
-let ze_global = null
+let zeglobal = null
 try {
-  ze_global = global
+  zeglobal = global
 } catch(e) {
-  ze_global = window
+  zeglobal = window
 }
 
-export default (ze_global).utils = {
-  sample,
+const util = zeglobal.util = {
+  expand,
+  every,
   sampleWithCache,
+  sample,
   ordered,
-  padding,
   reverse_order,
+  padding,
   max_by,
   shuffle,
   ascendingVerifier,
   descendingVerifier,
 }
+
+// pollution global space
+for (let meth in util) {
+  zeglobal[meth] = util[meth]
+}
+
+export default util

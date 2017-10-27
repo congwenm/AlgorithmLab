@@ -1,14 +1,20 @@
 import Jasmine from 'jasmine'
-import * as util from './util'
+import util from './util'
 import path from 'path';
 
-// test setup helper methods
-for (let meth in util) {
-  global[meth] = util[meth]
-}
-
 var jasmine = new Jasmine()
-jasmine.loadConfigFile(path.join(__dirname, "support/jasmine.json"));
+jasmine.loadConfig({
+  "spec_dir": "./src",
+  "spec_files": [
+    "**/*[sS]pec.js"
+  ],
+  "helpers": [
+    "helpers/**/*.js"
+  ],
+  "stopSpecOnExpectationFailure": false,
+  "random": false
+});
+
 jasmine.onComplete(function(passed) {
   if(passed) {
     console.log('All specs have passed');

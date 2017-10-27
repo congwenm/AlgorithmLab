@@ -5,9 +5,9 @@
   "main": "app.js",
   "scripts": {
     "lint": "./node_modules/.bin/eslint js",
-    "live": "find app src | entr babel-node src/run.js",
-    "test": "babel-node src/run.js",
-    "test:debug": "find app src | entr babel-node debug src/run.js",
+    "live": "find app src | entr babel-node src/run_test.js",
+    "test": "babel-node src/run_test.js",
+    "test:debug": "find app src | entr babel-node debug src/run_test.js",
     "amor:sort": "babel-node ./benchmarks/amortize/sort.js",
     "amor:reverse": "babel-node ./benchmarks/amortize/sort_reverse_order.js",
     "amor:ordered": "babel-node ./benchmarks/amortize/sort_ordered.js"

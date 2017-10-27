@@ -1,5 +1,4 @@
 /* not meant to test failure but rather random distribution */
-
 var from1to20 = expand(21).slice(1);
 describe('#shuffle', () => {
   it('result should be random, not meant to be tested but rather observed', () => {
