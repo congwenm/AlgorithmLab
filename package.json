@@ -1,8 +1,8 @@
 {
-  "name": "webpack-boilerplate",
+  "name": "algorithm_lab",
   "version": "1.0.0",
   "description": "",
-  "main": "app.js",
+  "main": "src/index.js",
   "scripts": {
     "lint": "./node_modules/.bin/eslint js",
     "live": "find app src | entr babel-node src/run_test.js",
@@ -12,8 +12,6 @@
     "amor:reverse": "babel-node ./benchmarks/amortize/sort_reverse_order.js",
     "amor:ordered": "babel-node ./benchmarks/amortize/sort_ordered.js"
   },
-  "author": "Yang Zhao",
-  "license": "ISC",
   "devDependencies": {
     "babel-cli": "^6.26.0",
     "babel-preset-env": "*",
