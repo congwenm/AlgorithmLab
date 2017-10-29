@@ -32,11 +32,11 @@ class RunningMedian
 
     if !median.nil? && n > median
       # add to min_h
-      p "added n to min_h: #{n}"
+      # puts "added n to min_h: #{n}"
       min_h.h_push(n)
     else
       # add to max_h
-      p "added n to max_h: #{n}"
+      # puts "added n to max_h: #{n}"
       max_h.h_push(n)
     end
 

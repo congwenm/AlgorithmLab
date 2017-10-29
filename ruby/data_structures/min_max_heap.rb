@@ -2,13 +2,13 @@ require 'byebug'
 
 class MaxHeap < Array
   def h_push(item)
-    p "h_pushing: #{item} into #{self}"
-    self << item 
+    # puts "h_pushing: #{item} into #{self}"
+    self << item
     bubble_up(size-1)
-  end     
+  end
 
   def get_root
-    self[0] 
+    self[0]
   end
 
   def bubble_up(p)
@@ -25,7 +25,7 @@ class MaxHeap < Array
   def left_child_of(n); 2 * n + 1; end
   def right_child_of(n); 2 * n + 2; end
 
-  def parent_indice(n) 
+  def parent_indice(n)
     n == 0 ? -1 : ((n-1)/2)
   end
 
@@ -36,7 +36,7 @@ class MaxHeap < Array
   end
 
   def extract_root
-    return nil if size == 0  
+    return nil if size == 0
     root = self[0]
     self[0] = pop()
     bubble_down 0
