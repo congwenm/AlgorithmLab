@@ -119,12 +119,12 @@ describe('BST', () => {
     })
   })
 
-  xdescribe('#delete_randomized', () => {
+  describe('#delete_randomized', () => {
     beforeEach(() => {
       bst = new BST([1,2,3,4,5,6,7,8,9,10])
     })
 
-    it('should delete the node', () => {
+    xit('should delete the node', () => {
       bst.delete_randomized(bst, 4)
       expect(bst.all.map(n => n.value)).toEqual([1,2,3,5,6,7,8,9,10])
     })
