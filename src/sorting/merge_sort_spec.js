@@ -17,6 +17,19 @@ describe('#mergeSort', () => {
 
   it('should sort objects based on key', () => {
     // copy out of the other one
+    expect(
+      util.ascendingVerifier(
+        mergeSort(
+          util.expand(20).map(n =>
+            ({
+              specialValue: (Math.random() * 100) | 0
+            })
+          ),
+          'specialValue'
+        ),
+        'specialValue'
+      )
+    ).toBe(true)
   })
 })
 

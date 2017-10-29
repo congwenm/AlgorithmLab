@@ -1,25 +1,24 @@
 // seems the aux is passed in specifically to save the amount of []s created for the sort
 
-export default function mergeSort(arr) {
-  return sort(arr, [], 0, arr.length - 1);
+export default function mergeSort(arr, key) {
+  return sort(arr, [], 0, arr.length - 1, key);
 }
 
 // not quite right
-function sort(arr, aux, lo, hi){
+function sort(arr, aux, lo, hi, key){
   // console.log('sorting', arr, aux, lo, hi, `current array ${arr.slice(lo, hi+1)}`)
 
   // if they are equal, most likely
   // if (hi <= lo) console.log('no need to sort');
   if (hi <= lo) return;
   var mid = Math.floor(lo + (hi - lo) / 2);
-  sort (arr, aux, lo, mid);
-  sort (arr, aux, mid + 1, hi);
+  sort(arr, aux, lo, mid, key);
+  sort(arr, aux, mid + 1, hi, key);
 
-  return merge(arr, aux, lo, mid, hi);
+  return merge(arr, aux, lo, mid, hi, key);
 }
 
-
-export const merge = function(arr, aux, lo, mid, hi) {
+export const merge = function(arr, aux, lo, mid, hi, key) {
   // console.log('-------------------------')
   // console.log('merging and sorting', arr.slice(lo, hi+1))
   for(let k = lo; k <= hi; k++) {
@@ -42,13 +41,16 @@ export const merge = function(arr, aux, lo, mid, hi) {
       arr[k] = aux[i++];
     }
     // right[0] is smaller than left[0],
-    else if (aux[j] < aux[i]) {
+    else if (key ?
+      aux[j][key] < aux[i][key] :
+      aux[j] < aux[i]
+    ) {
       // console.log('RIGHT is smaller than LEFT', `${aux[j]} > ${aux[i]}`)
       // console.log('adding', aux[j])
       arr[k] = aux[j++]
     }
     // remaining condition, left[0] is smaller than right[0]
-    else {  
+    else {
       // console.log('LEFT is smaller than RIGHT', `${aux[i]} < ${aux[j]}`)
       // console.log('adding', aux[i])
       arr[k] = aux[i++]

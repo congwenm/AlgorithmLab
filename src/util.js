@@ -81,12 +81,18 @@ const greaterThanOrEqualTo = (unit1, unit2) => unit2 >= unit1
 
 const lessThanOrEqualTo = (unit1, unit2) => unit2 <= unit1
 
-const ascendingVerifier = (arr) => {
-  return every(2)(arr, greaterThanOrEqualTo).every(t => t)
+const ascendingVerifier = (arr, key) => {
+  return every(2)(
+    arr.map(item => key ? item[key] : item),
+    greaterThanOrEqualTo
+  ).every(t => t)
 }
 
-const descendingVerifier = (arr) => {
-  return every(2)(arr, lessThanOrEqualTo).every(t => t)
+const descendingVerifier = (arr, key) => {
+  return every(2)(
+    arr.map(item => key ? item[key] : item),
+    lessThanOrEqualTo
+  ).every(t => t)
 }
 
 let zeglobal = null
