@@ -15,7 +15,7 @@ describe('#plainSort', () => {
     )).toBe(true)
   })
 
-  xit('should sort 1,000 numbers', () => {
+  it('should sort 1,000 numbers', () => {
     expect(util.ascendingVerifier(
       plainSort(
         util.expand(1000).map(n => (Math.random() * 1000) | 0)
