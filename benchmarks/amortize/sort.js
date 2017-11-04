@@ -1,7 +1,8 @@
 // argv[0] is /usr/local/bin/node
 // argv[1] is __filename
 import Benchmark, { Suite } from 'benchmark'
-import { sample } from '../../src/util'
+import util from '../../src/util'
+const { sample } = util
 
 var filenames = process.argv.slice(2);
 
