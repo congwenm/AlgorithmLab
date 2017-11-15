@@ -29,3 +29,20 @@ tree would look like:
 }
 ```
 
+# Speculation: `host` means native, <div /> is host, vs `composite`, which is
+custom
+
+After rendering you would only see `<div>`, however the `internal instance` tree
+contains both `composite` and `host` internal instances.
+
+The `composite internal instances` need to store:
+- current element
+- `public instance` if element type is class
+- single rendered `internal instance`. It can be either a `DOMComponent` or
+    a `CompositeComponent`
+
+The `host internal instances` need to store:
+- The current element
+- The DOM node.
+- All the child `internal instances`. Each of them can be either
+    a `DOMComponent` or a `CompositeComponent`.
