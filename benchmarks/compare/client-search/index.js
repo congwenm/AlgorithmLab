@@ -4,7 +4,8 @@ const expand = n => [...Array(n).keys()]
 const STATUSES = {
   ACTIVE: 'active',
   IN_PROGRESS: 'in_progress',
-  DONE: 'done'
+  DONE: 'done',
+  CANCELLED: 'cancelled'
 };
 
 const sample = [{
@@ -23,7 +24,7 @@ const sample = [{
 {
   last_name: 'Griffin',
   first_name: 'Lois',
-  status: STATUSES.DONE
+  status: STATUSES.CANCELLED
 }]
 const data = expand(1000 * 10 ).flatMap(() => sample)
 
@@ -43,9 +44,12 @@ const stringIndexedData = data.map(item => {
   })
 })
 
+
+// NOTE: used!
 const precomputedHashMatcher = {
   status: [STATUSES.DONE, STATUSES.ACTIVE],
   first_name: ['Peter']
+  // first_name: ['Peter', 'Joe', 'Lois']
 }
 
 const precomputedHashFilterFn = item =>
@@ -63,8 +67,12 @@ const precomputedHashFilterFn = item =>
 //   return true;
 // }
 
+// NOTE: used!
 const precomputedIndexFilters = {
-  or: [`status:${STATUSES.DONE}`, `status:${STATUSES.ACTIVE}`],
+  or: [
+    // groupings
+    [`status:${STATUSES.DONE}`, `status:${STATUSES.ACTIVE}`]
+  ],
   regular: [`first_name:Peter`]
 }
 
@@ -82,7 +90,11 @@ simple({
   // },
   'string index filter (pre computed)': () => {
     return stringIndexedData.filter(item =>
-      precomputedIndexFilters.or.some(filter => item.stringIndex.includes(filter)) &&
+      precomputedIndexFilters.or.every(
+        groupFilters => groupFilters.some(
+          filter => item.stringIndex.includes(filter)
+        )
+      ) &&
         precomputedIndexFilters.regular.every(filter => item.stringIndex.includes(filter))
     )
   },
@@ -91,9 +103,17 @@ simple({
   // },
   'index filter (pre computed)': () => {
     return indexedData.filter(item =>
-      precomputedIndexFilters.or.some(filter => item.index[filter]) &&
+      precomputedIndexFilters.or.every(
+        groupFilters => groupFilters.some(
+          filter => item.index[filter]
+        )
+      ) &&
         precomputedIndexFilters.regular.every(filter => item.index[filter])
     )
   }
 })
 
+// Results for --->   status = ['DONE', 'ACTIVE'] && first_name = 'PETER'
+// manual filter                      x 229 ops/sec ±1.49% (80 runs sampled)
+// string index filter (pre computed) x 188 ops/sec ±0.73% (82 runs sampled)
+// index filter (pre computed)        x 458 ops/sec ±0.51% (85 runs sampled)
