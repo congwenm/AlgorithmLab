@@ -22,5 +22,6 @@ const simple = (tests, opts = {}) => {
 }
 
 module.exports = {
-  simple
+  simple,
+  expand: n => [...Array(n).keys()]
 }
