@@ -1,4 +1,4 @@
-const { simple, expand } = require("./helper/tools");
+const { simple, expand } = require("../helper/tools");
 
 const string = expand(100).flatMap(() => 'falkdjflaksjdflkajsdlfkjalkdjflakjsdflkjasdlkfjalskdjflkja').join('')
 // const set = new Set(range)
