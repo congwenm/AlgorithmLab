@@ -40,8 +40,14 @@ const reverse_order = function(num) {
   return reverse_order[num] = ordered(num).reverse();
 }
 
+/**
+ *
+ * @param {String} val - original string
+ * @param {Number} number - number of space needing to pad
+ * @param {left/right} direction - not implemented
+ */
 const padding = function(val, number, direction) {
-  var pad = expand(number).map(n => ' ').join('')
+  var pad = new Array(number).fill().map(n => ' ').join('')
   return (pad + val.toString()).slice(-number)
 }
 
